@@ -1,6 +1,6 @@
 <?php
 require_once '../../app/auth.php';
-checkRole(['Administrator', 'Pharmacist']);
+checkRole(['Administrator', 'Pharmacist', 'Staff']);
 
 $database = new Database();
 $db = $database->getConnection();
@@ -235,7 +235,9 @@ $returnableSales = $returns->getRecentSalesForReturn(250);
                                         <span class="badge bg-<?php echo $sBadge; ?>"><?php echo ucfirst($r['status']); ?></span>
                                     </td>
                                     <td class="text-end px-4">
-                                        <?php if ($r['status'] === 'pending'): ?>
+                                        <?php if ($r['status'] === 'pending' && !hasPermission('returns.approve')): ?>
+                                            <small class="text-muted"><i class="bi bi-hourglass-split me-1"></i>Waiting for the pharmacist</small>
+                                        <?php elseif ($r['status'] === 'pending'): ?>
                                             <form method="POST" class="d-inline-flex align-items-center gap-1" onsubmit="return confirm('Approve this return and restock?')">
                                                 <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
                                                 <input type="hidden" name="action" value="approve">
