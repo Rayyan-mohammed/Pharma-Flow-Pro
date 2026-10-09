@@ -129,9 +129,9 @@ $card_auth_ref = trim((string)($first_sale['card_auth_ref'] ?? ''));
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
     <style>
         :root {
-            --primary: #1a5276;
-            --primary-light: #2980b9;
-            --accent: #27ae60;
+            --primary: #0f766e;
+            --primary-light: #14b8a6;
+            --accent: #f59e0b;
             --bg: #f0f2f5;
             --text-dark: #2c3e50;
             --text-muted: #7f8c8d;
@@ -234,7 +234,7 @@ $card_auth_ref = trim((string)($first_sale['card_auth_ref'] ?? ''));
             margin-top: 4px;
             font-size: 0.75rem;
             color: var(--primary-light);
-            background: #eaf2f8;
+            background: #f0fdfa;
             padding: 2px 8px;
             border-radius: 4px;
             font-weight: 500;
@@ -335,8 +335,9 @@ $card_auth_ref = trim((string)($first_sale['card_auth_ref'] ?? ''));
     <!-- Header -->
     <div class="invoice-header">
         <div class="brand">
-            <h2><i class="bi bi-capsule"></i> PharmaFlow Pro</h2>
-            <p>123 Medical Plaza, Health City | (555) 123-4567</p>
+            <h2><i class="bi bi-heart-pulse-fill"></i> <?php echo htmlspecialchars(SHOP_NAME); ?></h2>
+            <p><?php echo htmlspecialchars(SHOP_ADDRESS); ?> | <?php echo htmlspecialchars(SHOP_PHONE); ?></p>
+            <p>Proprietor: <?php echo htmlspecialchars(SHOP_PROPRIETOR); ?> | <?php echo htmlspecialchars(SHOP_EMAIL); ?></p>
         </div>
         <div class="invoice-meta">
             <div class="inv-label">Invoice</div>
@@ -425,7 +426,7 @@ $card_auth_ref = trim((string)($first_sale['card_auth_ref'] ?? ''));
     <!-- Footer -->
     <div class="invoice-footer">
         <div class="footer-note">
-            <i class="bi bi-heart-pulse"></i> Thank you for choosing <strong>PharmaFlow Pro</strong>.<br>
+            <i class="bi bi-heart-pulse"></i> Thank you for choosing <strong><?php echo htmlspecialchars(SHOP_NAME); ?></strong>.<br>
             We wish you a speedy recovery. Get well soon!
         </div>
         <div class="footer-note" style="text-align:right;">

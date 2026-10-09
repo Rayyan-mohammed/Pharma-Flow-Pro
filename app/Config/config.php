@@ -27,3 +27,11 @@ _cfg_default('BASE_URL', '/pharmaflow_pro/public');
 
 // Security: must be overridden in config.local.php; backup/restore refuses the default
 _cfg_default('BACKUP_RESTORE_PASSWORD', 'ChangeThis@123');
+
+// Shop details shown on invoices, the login page and navigation
+_cfg_default('SHOP_NAME', 'Om Sai Baba Medical and General Store');
+_cfg_default('SHOP_SHORT_NAME', 'Om Sai Baba Medical Store');
+_cfg_default('SHOP_ADDRESS', 'Yenugonda, Mahabubnagar');
+_cfg_default('SHOP_PHONE', '+91 98851 44064');
+_cfg_default('SHOP_EMAIL', 'omsaibaba@mystore.com');
+_cfg_default('SHOP_PROPRIETOR', 'Rajesh Kumar');
