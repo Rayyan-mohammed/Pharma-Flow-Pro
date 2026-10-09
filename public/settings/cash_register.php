@@ -1,6 +1,6 @@
 <?php
 require_once '../../app/auth.php';
-checkRole(['Administrator']);
+checkRole(['Administrator', 'Pharmacist']);
 
 $database = new Database();
 $db = $database->getConnection();
