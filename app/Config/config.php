@@ -16,6 +16,7 @@ function _cfg_default($name, $default) {
 
 // Database Configuration
 _cfg_default('DB_HOST', 'localhost');
+_cfg_default('DB_PORT', '3306');
 _cfg_default('DB_NAME', 'medical_management');
 _cfg_default('DB_USER', 'root');
 _cfg_default('DB_PASS', '');
