@@ -42,9 +42,11 @@ foreach($salesChartData as $data) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
     <link href="../styles.css" rel="stylesheet">
+    <link href="../app.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
+<body class="has-shell">
+<?php render_app_shell(); ?>
     <nav class="navbar navbar-dark bg-primary">
         <div class="container d-flex justify-content-between align-items-center">
             <a class="navbar-brand fw-bold" href="#">
@@ -117,31 +119,7 @@ foreach($salesChartData as $data) {
         <div class="row g-4">
             <!-- Main Actions Column -->
             <div class="col-lg-8">
-                <h4 class="mb-3 text-secondary">Quick Actions</h4>
-                <div class="row g-3 mb-4">
-                    <div class="col-6 col-md-4 col-lg-3"><a href="../sales/sell_medicine.php" class="card dashboard-btn"><div class="dashboard-icon"><i class="bi bi-cart-check"></i></div>Sell</a></div>
-                    <div class="col-6 col-md-4 col-lg-3"><a href="../add/add-medicine.php" class="card dashboard-btn"><div class="dashboard-icon"><i class="bi bi-plus-circle"></i></div>Add Medicine</a></div>
-                    <div class="col-6 col-md-4 col-lg-3"><a href="../check/check-stock.php" class="card dashboard-btn"><div class="dashboard-icon"><i class="bi bi-search"></i></div>Check Stock</a></div>
-                    <div class="col-6 col-md-4 col-lg-3"><a href="../prescription/prescription-management.php" class="card dashboard-btn"><div class="dashboard-icon"><i class="bi bi-file-earmark-medical"></i></div>Prescriptions</a></div>
-                    <div class="col-6 col-md-4 col-lg-3"><a href="../sales/sales_records.php" class="card dashboard-btn"><div class="dashboard-icon"><i class="bi bi-receipt"></i></div>Sales</a></div>
-                    <div class="col-6 col-md-4 col-lg-3"><a href="../expiration/expiration-management.php" class="card dashboard-btn"><div class="dashboard-icon"><i class="bi bi-clock-history"></i></div>Expirations</a></div>
-                    <div class="col-6 col-md-4 col-lg-3"><a href="../update/update-stock.php" class="card dashboard-btn"><div class="dashboard-icon"><i class="bi bi-box-seam"></i></div>Restock</a></div>
-                    <div class="col-6 col-md-4 col-lg-3"><a href="../inventory/inventory_report.php" class="card dashboard-btn"><div class="dashboard-icon"><i class="bi bi-clipboard-data"></i></div>Inventory</a></div>
-                    <div class="col-6 col-md-4 col-lg-3"><a href="../top_sales/top-selling.php" class="card dashboard-btn"><div class="dashboard-icon"><i class="bi bi-trophy"></i></div>Top Selling</a></div>
-                    <div class="col-6 col-md-4 col-lg-3"><a href="../supplier/supplier-management.php" class="card dashboard-btn"><div class="dashboard-icon"><i class="bi bi-truck"></i></div>Suppliers</a></div>
-                    <div class="col-6 col-md-4 col-lg-3"><a href="../purchase/purchase-management.php" class="card dashboard-btn"><div class="dashboard-icon"><i class="bi bi-truck-flatbed"></i></div>Purchases</a></div>
-                    <div class="col-6 col-md-4 col-lg-3"><a href="../purchase/purchase-history.php" class="card dashboard-btn"><div class="dashboard-icon"><i class="bi bi-clock-history"></i></div>Purchase History</a></div>
-                    <div class="col-6 col-md-4 col-lg-3"><a href="../purchase/supplier-payables.php" class="card dashboard-btn"><div class="dashboard-icon"><i class="bi bi-hourglass-split"></i></div>Payable Aging</a></div>
-                    <div class="col-6 col-md-4 col-lg-3"><a href="../purchase/settlements.php" class="card dashboard-btn"><div class="dashboard-icon"><i class="bi bi-wallet2"></i></div>Settlements</a></div>
-                    <div class="col-6 col-md-4 col-lg-3"><a href="../purchase/purchase-returns.php" class="card dashboard-btn"><div class="dashboard-icon"><i class="bi bi-arrow-counterclockwise"></i></div>Supplier Returns</a></div>
-                    <div class="col-6 col-md-4 col-lg-3"><a href="../sales/returns.php" class="card dashboard-btn"><div class="dashboard-icon"><i class="bi bi-arrow-return-left"></i></div>Returns</a></div>
-                    <div class="col-6 col-md-4 col-lg-3"><a href="../add/categories.php" class="card dashboard-btn"><div class="dashboard-icon"><i class="bi bi-tags"></i></div>Categories</a></div>
-                    <div class="col-6 col-md-4 col-lg-3"><a href="../inventory/alerts.php" class="card dashboard-btn"><div class="dashboard-icon"><i class="bi bi-bell"></i></div>Alerts</a></div>
-                    <div class="col-6 col-md-4 col-lg-3"><a href="../inventory/reorder_suggestions.php" class="card dashboard-btn"><div class="dashboard-icon"><i class="bi bi-arrow-repeat"></i></div>Reorder Plan</a></div>
-                    <div class="col-6 col-md-4 col-lg-3"><a href="../settings/customer_ledger.php" class="card dashboard-btn"><div class="dashboard-icon"><i class="bi bi-people-fill"></i></div>Customer Ledger</a></div>
-                    <div class="col-6 col-md-4 col-lg-3"><a href="../settings/stock_analytics.php" class="card dashboard-btn"><div class="dashboard-icon"><i class="bi bi-graph-up"></i></div>Stock Analytics</a></div>
-                    <div class="col-6 col-md-4 col-lg-3"><a href="../inventory/alert_center.php" class="card dashboard-btn"><div class="dashboard-icon"><i class="bi bi-bell-fill"></i></div>Alert Center</a></div>
-                </div>
+                <?php render_operation_groups(); ?>
 
                 <!-- Sales Chart -->
                 <div class="card mb-4">

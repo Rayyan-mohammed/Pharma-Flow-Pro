@@ -99,8 +99,10 @@ if($_POST) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="../styles.css" rel="stylesheet">
+    <link href="../app.css" rel="stylesheet">
 </head>
-<body>
+<body class="has-shell">
+<?php render_app_shell(); ?>
     <!-- Navigation Bar -->
     <nav class="navbar navbar-dark bg-primary">
         <div class="container">

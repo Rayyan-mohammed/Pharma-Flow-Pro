@@ -15,6 +15,7 @@ $userName = htmlspecialchars(!empty($user['first_name']) ? $user['first_name'] :
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
     <link href="../styles.css" rel="stylesheet">
+    <link href="../app.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .kpi-card { border: none; border-radius: 1rem; transition: transform 0.2s, box-shadow 0.2s; }
@@ -46,7 +47,8 @@ $userName = htmlspecialchars(!empty($user['first_name']) ? $user['first_name'] :
         @media print { .no-print { display: none !important; } .container { max-width: 100%; } }
     </style>
 </head>
-<body>
+<body class="has-shell">
+<?php render_app_shell(); ?>
     <!-- Navbar -->
     <nav class="navbar navbar-dark bg-primary no-print">
         <div class="container">

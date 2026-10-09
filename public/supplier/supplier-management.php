@@ -86,8 +86,10 @@ if ($action == 'list') {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link href="../styles.css" rel="stylesheet">
+    <link href="../app.css" rel="stylesheet">
 </head>
-<body>
+<body class="has-shell">
+<?php render_app_shell(); ?>
     <!-- Navbar -->
     <nav class="navbar navbar-dark bg-primary">
         <div class="container">

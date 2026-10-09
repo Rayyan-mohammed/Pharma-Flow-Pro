@@ -33,8 +33,10 @@ $lowStockItems = $medicine->getLowStockItems();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
     <link href="../styles.css" rel="stylesheet">
+    <link href="../app.css" rel="stylesheet">
 </head>
-<body>
+<body class="has-shell">
+<?php render_app_shell(); ?>
     <nav class="navbar navbar-dark bg-primary">
         <div class="container d-flex justify-content-between align-items-center">
             <a class="navbar-brand fw-bold" href="#">
@@ -101,39 +103,7 @@ $lowStockItems = $medicine->getLowStockItems();
         <div class="row g-4">
             <!-- Quick Actions -->
             <div class="col-lg-8">
-                <h4 class="mb-3 text-secondary">Your Actions</h4>
-                <div class="row g-3 mb-4">
-                    <div class="col-6 col-md-4">
-                        <a href="../sales/sell_medicine.php" class="card dashboard-btn h-100">
-                            <div class="dashboard-icon"><i class="bi bi-cart-check"></i></div>
-                            Sell Medicine
-                        </a>
-                    </div>
-                    <div class="col-6 col-md-4">
-                        <a href="../check/check-stock.php" class="card dashboard-btn h-100">
-                            <div class="dashboard-icon"><i class="bi bi-search"></i></div>
-                            Check Stock
-                        </a>
-                    </div>
-                    <div class="col-6 col-md-4">
-                        <a href="../prescription/prescription-management.php" class="card dashboard-btn h-100">
-                            <div class="dashboard-icon"><i class="bi bi-file-earmark-medical"></i></div>
-                            Prescriptions
-                        </a>
-                    </div>
-                    <div class="col-6 col-md-4">
-                        <a href="../sales/sales_records.php" class="card dashboard-btn h-100">
-                            <div class="dashboard-icon"><i class="bi bi-receipt"></i></div>
-                            Sales Records
-                        </a>
-                    </div>
-                    <div class="col-6 col-md-4">
-                        <a href="../expiration/expiration-management.php" class="card dashboard-btn h-100">
-                            <div class="dashboard-icon"><i class="bi bi-clock-history"></i></div>
-                            Expirations
-                        </a>
-                    </div>
-                </div>
+                <?php render_operation_groups(); ?>
             </div>
 
             <!-- Side Widgets -->

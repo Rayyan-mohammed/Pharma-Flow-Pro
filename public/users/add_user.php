@@ -64,6 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
     <link href="../styles.css" rel="stylesheet">
+    <link href="../app.css" rel="stylesheet">
     <style>
         #register-container {
             max-width: 600px;
@@ -71,7 +72,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     </style>
 </head>
-<body>
+<body class="has-shell">
+<?php render_app_shell(); ?>
     <nav class="navbar navbar-dark bg-primary">
         <div class="container">
             <a class="navbar-brand fw-bold" href="../dashboard/dashboard.php">
