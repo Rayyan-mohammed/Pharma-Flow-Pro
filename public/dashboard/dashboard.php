@@ -71,7 +71,7 @@ foreach($salesChartData as $data) {
                     <div class="dropdown-menu shadow-lg p-0" id="searchDropdown" style="width: 380px; max-height: 400px; overflow-y: auto;"></div>
                 </div>
                 <a class="btn btn-outline-light btn-sm" href="../users/profile.php"><i class="bi bi-person-circle"></i></a>
-                <a class="btn btn-light btn-sm" href="../logout.php"><i class="bi bi-box-arrow-right me-1"></i>Logout</a>
+                <form method="POST" action="../logout.php" class="d-inline"><input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>"><button type="submit" class="btn btn-light btn-sm"><i class="bi bi-box-arrow-right me-1"></i>Logout</button></form>
             </div>
         </div>
     </nav>

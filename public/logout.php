@@ -1,6 +1,13 @@
 <?php
 require_once '../app/init.php';
 
+// Logout must be a POST with a valid CSRF token so other sites cannot sign users out
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header('Location: index.php');
+    exit();
+}
+verify_csrf_token();
+
 // Log logout before destroying session
 if (isset($_SESSION['currentUser'])) {
     try {
@@ -13,6 +20,11 @@ if (isset($_SESSION['currentUser'])) {
     }
 }
 
+$_SESSION = [];
+if (ini_get('session.use_cookies')) {
+    $cp = session_get_cookie_params();
+    setcookie(session_name(), '', time() - 42000, $cp['path'], $cp['domain'], $cp['secure'], $cp['httponly']);
+}
 session_destroy();
 header('Location: index.php');
 exit();
