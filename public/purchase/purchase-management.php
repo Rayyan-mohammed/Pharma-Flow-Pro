@@ -1,6 +1,7 @@
 <?php
 require_once '../../app/auth.php';
 checkRole(['Administrator', 'Pharmacist']);
+checkPermission('purchase.create');
 
 $database = new Database();
 $db = $database->getConnection();

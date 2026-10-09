@@ -38,16 +38,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $map = [];
 try {
-    // Self-heal: create table if migration was not run.
-    $db->exec("CREATE TABLE IF NOT EXISTS role_permissions (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        role_name VARCHAR(50) NOT NULL,
-        permission_key VARCHAR(100) NOT NULL,
-        is_allowed TINYINT(1) NOT NULL DEFAULT 1,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        UNIQUE KEY uq_role_permission (role_name, permission_key)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
-
     $stmt = $db->query("SELECT role_name, permission_key, is_allowed FROM role_permissions");
     foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $r) {
         $map[$r['role_name'] . '|' . $r['permission_key']] = (int)$r['is_allowed'] === 1;

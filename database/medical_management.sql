@@ -511,24 +511,24 @@ CREATE TABLE `role_permissions` (
 --
 
 INSERT INTO `role_permissions` (`id`, `role_name`, `permission_key`, `is_allowed`, `created_at`) VALUES
-(1, 'Administrator', 'users.manage', 0, '2026-03-13 10:15:39'),
-(2, 'Administrator', 'backup.restore', 0, '2026-03-13 10:15:39'),
-(3, 'Administrator', 'returns.approve', 0, '2026-03-13 10:15:39'),
-(4, 'Administrator', 'settings.financial', 0, '2026-03-13 10:15:39'),
-(5, 'Administrator', 'purchase.create', 0, '2026-03-13 10:15:39'),
-(6, 'Administrator', 'sales.create', 0, '2026-03-13 10:15:39'),
+(1, 'Administrator', 'users.manage', 1, '2026-03-13 10:15:39'),
+(2, 'Administrator', 'backup.restore', 1, '2026-03-13 10:15:39'),
+(3, 'Administrator', 'returns.approve', 1, '2026-03-13 10:15:39'),
+(4, 'Administrator', 'settings.financial', 1, '2026-03-13 10:15:39'),
+(5, 'Administrator', 'purchase.create', 1, '2026-03-13 10:15:39'),
+(6, 'Administrator', 'sales.create', 1, '2026-03-13 10:15:39'),
 (7, 'Pharmacist', 'users.manage', 0, '2026-03-13 10:15:39'),
 (8, 'Pharmacist', 'backup.restore', 0, '2026-03-13 10:15:39'),
-(9, 'Pharmacist', 'returns.approve', 0, '2026-03-13 10:15:39'),
+(9, 'Pharmacist', 'returns.approve', 1, '2026-03-13 10:15:39'),
 (10, 'Pharmacist', 'settings.financial', 0, '2026-03-13 10:15:39'),
-(11, 'Pharmacist', 'purchase.create', 0, '2026-03-13 10:15:39'),
-(12, 'Pharmacist', 'sales.create', 0, '2026-03-13 10:15:39'),
+(11, 'Pharmacist', 'purchase.create', 1, '2026-03-13 10:15:39'),
+(12, 'Pharmacist', 'sales.create', 1, '2026-03-13 10:15:39'),
 (13, 'Staff', 'users.manage', 0, '2026-03-13 10:15:39'),
 (14, 'Staff', 'backup.restore', 0, '2026-03-13 10:15:39'),
 (15, 'Staff', 'returns.approve', 0, '2026-03-13 10:15:39'),
 (16, 'Staff', 'settings.financial', 0, '2026-03-13 10:15:39'),
 (17, 'Staff', 'purchase.create', 0, '2026-03-13 10:15:39'),
-(18, 'Staff', 'sales.create', 0, '2026-03-13 10:15:39');
+(18, 'Staff', 'sales.create', 1, '2026-03-13 10:15:39');
 
 -- --------------------------------------------------------
 

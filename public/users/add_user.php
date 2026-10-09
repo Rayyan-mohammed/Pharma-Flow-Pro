@@ -1,6 +1,7 @@
 <?php
 require_once '../../app/auth.php';
 checkRole(['Administrator']);
+checkPermission('users.manage');
 
 $database = new Database();
 $db = $database->getConnection();

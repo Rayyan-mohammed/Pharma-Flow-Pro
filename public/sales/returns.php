@@ -63,6 +63,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             }
         }
+    } elseif (($action === 'approve' || $action === 'reject') && !hasPermission('returns.approve')) {
+        $message = 'You do not have permission to approve or reject returns.';
+        $messageType = 'danger';
     } elseif ($action === 'approve') {
         $returnId = (int)$_POST['return_id'];
         $refundMethod = $_POST['refund_method'] ?? '';

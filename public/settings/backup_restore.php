@@ -1,6 +1,7 @@
 <?php
 require_once '../../app/auth.php';
 checkRole(['Administrator']);
+checkPermission('backup.restore');
 
 $database = new Database();
 $db = $database->getConnection();
