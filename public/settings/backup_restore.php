@@ -36,7 +36,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $_POST['action'] ?? '';
     $sectionPassword = $_POST['section_password'] ?? '';
 
-    if (!defined('BACKUP_RESTORE_PASSWORD') || !hash_equals(BACKUP_RESTORE_PASSWORD, (string)$sectionPassword)) {
+    if (BACKUP_RESTORE_PASSWORD === 'ChangeThis@123') {
+        $message = 'Set BACKUP_RESTORE_PASSWORD in app/Config/config.local.php before using Backup & Restore.';
+        $messageType = 'danger';
+        $action = '';
+    } elseif (!defined('BACKUP_RESTORE_PASSWORD') || !hash_equals(BACKUP_RESTORE_PASSWORD, (string)$sectionPassword)) {
         $message = 'Invalid Backup & Restore password.';
         $messageType = 'danger';
         $action = '';
