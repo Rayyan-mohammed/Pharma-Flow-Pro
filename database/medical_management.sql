@@ -650,10 +650,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `email`, `password_hash`, `first_name`, `last_name`, `role`, `branch_id`, `phone`, `address`, `created_at`, `updated_at`, `is_active`) VALUES
-(7, 'krishna@gmail.com', '$2y$10$v/57PMchCGE49tH/bjmyAuZuzHsKlZ31hoMjbwz7l.Za1FaIjGaOW', 'krishna', 'reddy', 'Pharmacist', 1, '7386006448', 'heyee', '2026-02-03 05:31:25', '2026-02-18 14:50:30', 1),
-(8, 'lahari@gmail.com', '$2y$10$d09xxrit9JZiyY4.nduVtOVMV4Zs.3vviViaJI7Xk3DMyoIb898Gq', 'lahari', 'm', 'Staff', 1, '7086006448', 'heyylo', '2026-02-03 06:17:15', '2026-03-10 19:18:05', 1),
-(13, 'admin1@pharmacy.com', '$2y$10$v/57PMchCGE49tH/bjmyAuZuzHsKlZ31hoMjbwz7l.Za1FaIjGaOW', 'System', 'Admin', 'Administrator', 1, '0000000000', 'System', '2026-02-03 07:49:19', '2026-02-18 14:54:39', 1),
-(19, 'rayyan1652@gmail.com', '$2y$10$LE8DYTiaRVs1XPful1OPk.fc413biyx1QYpBZfm4pjOvk.WoIpqAi', 'rayyan', 'md', 'Administrator', 1, '70572300041', 'erfgh', '2026-03-16 05:54:37', '2026-03-16 05:54:37', 1);
+(7, 'krishna@gmail.com', '!disabled-reset-required', 'krishna', 'reddy', 'Pharmacist', 1, '7386006448', 'heyee', '2026-02-03 05:31:25', '2026-02-18 14:50:30', 1),
+(8, 'lahari@gmail.com', '!disabled-reset-required', 'lahari', 'm', 'Staff', 1, '7086006448', 'heyylo', '2026-02-03 06:17:15', '2026-03-10 19:18:05', 1),
+(13, 'admin1@pharmacy.com', '!disabled-reset-required', 'System', 'Admin', 'Administrator', 1, '0000000000', 'System', '2026-02-03 07:49:19', '2026-02-18 14:54:39', 1),
+(19, 'rayyan1652@gmail.com', '!disabled-reset-required', 'rayyan', 'md', 'Administrator', 1, '70572300041', 'erfgh', '2026-03-16 05:54:37', '2026-03-16 05:54:37', 1);
 
 --
 -- Indexes for dumped tables
