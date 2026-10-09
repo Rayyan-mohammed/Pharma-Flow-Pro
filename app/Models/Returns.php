@@ -40,9 +40,15 @@ class Returns {
     public function approve($returnId, $processedBy, $refundMethod = null, $refundReference = null) {
         $this->conn->beginTransaction();
         try {
+            // Lock the return row so concurrent approvals cannot both restock
+            $lock = $this->conn->prepare("SELECT status FROM " . $this->table_name . " WHERE id = :id FOR UPDATE");
+            $lock->bindValue(':id', (int)$returnId, PDO::PARAM_INT);
+            $lock->execute();
+            $lockedStatus = $lock->fetchColumn();
+
             // Get return details
             $ret = $this->readOne($returnId);
-            if (!$ret || $ret['status'] !== 'pending') {
+            if ($lockedStatus !== 'pending' || !$ret || $ret['status'] !== 'pending') {
                 $this->conn->rollBack();
                 return false;
             }
@@ -58,32 +64,15 @@ class Returns {
             $stmt->bindParam(':id', $returnId, PDO::PARAM_INT);
             $stmt->execute();
 
-            // Restock: add quantity back via a new batch entry
-            $batchQuery = "INSERT INTO medicine_batches (medicine_id, batch_number, quantity, expiration_date) 
-                           VALUES (:mid, :batch, :qty, DATE_ADD(CURDATE(), INTERVAL 6 MONTH))";
-            $batchStmt = $this->conn->prepare($batchQuery);
-            $batchStmt->bindParam(':mid', $ret['medicine_id'], PDO::PARAM_INT);
+            // Restock through the shared routine: new batch, inventory log, and
+            // medicines.stock recalculated from batches
+            $inventory = new Inventory($this->conn);
             $batchNum = 'RETURN-' . $returnId . '-' . date('Ymd');
-            $batchStmt->bindParam(':batch', $batchNum);
-            $batchStmt->bindParam(':qty', $ret['quantity'], PDO::PARAM_INT);
-            $batchStmt->execute();
-
-            // Also update medicines.stock for backward compatibility
-            $stockQuery = "UPDATE medicines SET stock = stock + :qty WHERE id = :mid";
-            $stockStmt = $this->conn->prepare($stockQuery);
-            $stockStmt->bindParam(':qty', $ret['quantity'], PDO::PARAM_INT);
-            $stockStmt->bindParam(':mid', $ret['medicine_id'], PDO::PARAM_INT);
-            $stockStmt->execute();
-
-            // Create inventory log for the return
-            $logQuery = "INSERT INTO inventory_logs (medicine_id, type, quantity, reason) 
-                         VALUES (:mid, 'in', :qty, :reason)";
-            $logStmt = $this->conn->prepare($logQuery);
-            $logStmt->bindParam(':mid', $ret['medicine_id'], PDO::PARAM_INT);
-            $logStmt->bindParam(':qty', $ret['quantity'], PDO::PARAM_INT);
             $reason = 'Return approved - Refund #' . $returnId . ': ' . $ret['reason'];
-            $logStmt->bindParam(':reason', $reason);
-            $logStmt->execute();
+            $expiry = date('Y-m-d', strtotime('+6 months'));
+            if (!$inventory->adjustStock((int)$ret['medicine_id'], (int)$ret['quantity'], 'in', $reason, $batchNum, $expiry)) {
+                throw new Exception('Failed to restock returned medicine.');
+            }
 
             $this->conn->commit();
             return true;
@@ -101,7 +90,7 @@ class Returns {
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':processed_by', $processedBy, PDO::PARAM_INT);
         $stmt->bindParam(':id', $returnId, PDO::PARAM_INT);
-        return $stmt->execute();
+        return $stmt->execute() && $stmt->rowCount() > 0;
     }
 
     public function readOne($id) {
