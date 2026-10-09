@@ -1,6 +1,7 @@
 <?php
 require_once '../../app/auth.php';
 checkRole(['Administrator', 'Pharmacist', 'Staff']);
+checkPermission('sales.create');
 require_once '../../app/Models/Sale.php';
 
 $database = new Database();
@@ -877,7 +878,7 @@ $medicines = $medicine->read();
 
             fetch('hold_cart_api.php', {
                 method: 'POST',
-                headers: {'Content-Type': 'application/json'},
+                headers: {'Content-Type': 'application/json', 'X-CSRF-Token': CSRF_TOKEN},
                 body: JSON.stringify(payload)
             }).then(r => r.json()).then(res => {
                 if (!res.success) {
@@ -889,6 +890,8 @@ $medicines = $medicine->read();
                 renderCart();
             }).catch(() => alert('Failed to hold cart.'));
         }
+
+        const CSRF_TOKEN = <?php echo json_encode(generate_csrf_token()); ?>;
 
         function loadHeldCarts() {
             fetch('hold_cart_api.php?action=list')
@@ -920,7 +923,11 @@ $medicines = $medicine->read();
         }
 
         function resumeHeldCart(id) {
-            fetch('hold_cart_api.php?action=resume&id=' + encodeURIComponent(id))
+            fetch('hold_cart_api.php', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json', 'X-CSRF-Token': CSRF_TOKEN},
+                body: JSON.stringify({action: 'resume', id: id})
+            })
                 .then(r => r.json())
                 .then(res => {
                     if (!res.success) {

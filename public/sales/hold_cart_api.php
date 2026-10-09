@@ -4,12 +4,24 @@ checkRole(['Administrator', 'Pharmacist', 'Staff']);
 
 header('Content-Type: application/json');
 
+if (!hasPermission('sales.create')) {
+    http_response_code(403);
+    echo json_encode(['success' => false, 'message' => 'Not permitted.']);
+    exit;
+}
+
 $database = new Database();
 $db = $database->getConnection();
 $userId = (int)($_SESSION['currentUser']['user_id'] ?? 0);
 
 try {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // State-changing request: the page must send the session's CSRF token in a header
+        $sentToken = $_SERVER['HTTP_X_CSRF_TOKEN'] ?? '';
+        if (empty($_SESSION['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $sentToken)) {
+            http_response_code(403);
+            throw new Exception('CSRF validation failed. Refresh the page and try again.');
+        }
         $raw = file_get_contents('php://input');
         $payload = json_decode($raw, true);
         if (!is_array($payload)) {
@@ -17,6 +29,27 @@ try {
         }
 
         $action = $payload['action'] ?? '';
+        if ($action === 'resume') {
+            $id = (int)($payload['id'] ?? 0);
+            if ($id <= 0) {
+                throw new Exception('Invalid cart id.');
+            }
+
+            $stmt = $db->prepare("SELECT * FROM held_carts WHERE id = :id AND status = 'Held' LIMIT 1");
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            if (!$row || ((int)$row['created_by'] !== $userId && !hasRole('Administrator'))) {
+                throw new Exception('Held cart not found.');
+            }
+
+            $up = $db->prepare("UPDATE held_carts SET status = 'Resumed', resumed_at = NOW() WHERE id = :id");
+            $up->bindValue(':id', $id, PDO::PARAM_INT);
+            $up->execute();
+
+            echo json_encode(['success' => true, 'data' => $row]);
+            exit;
+        }
         if ($action !== 'hold') {
             throw new Exception('Unsupported action.');
         }
@@ -42,31 +75,13 @@ try {
 
     $action = $_GET['action'] ?? '';
     if ($action === 'list') {
-        $stmt = $db->prepare("SELECT id, hold_code, customer_name, customer_phone, created_at FROM held_carts WHERE status = 'Held' ORDER BY created_at DESC LIMIT 50");
+        $isAdmin = hasRole('Administrator');
+        $stmt = $db->prepare("SELECT id, hold_code, customer_name, customer_phone, created_at FROM held_carts WHERE status = 'Held'" . ($isAdmin ? '' : ' AND created_by = :uid') . " ORDER BY created_at DESC LIMIT 50");
+        if (!$isAdmin) {
+            $stmt->bindValue(':uid', $userId, PDO::PARAM_INT);
+        }
         $stmt->execute();
         echo json_encode(['success' => true, 'data' => $stmt->fetchAll(PDO::FETCH_ASSOC)]);
-        exit;
-    }
-
-    if ($action === 'resume') {
-        $id = (int)($_GET['id'] ?? 0);
-        if ($id <= 0) {
-            throw new Exception('Invalid cart id.');
-        }
-
-        $stmt = $db->prepare("SELECT * FROM held_carts WHERE id = :id AND status = 'Held' LIMIT 1");
-        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        if (!$row || ((int)$row['created_by'] !== $userId && !hasRole('Administrator'))) {
-            throw new Exception('Held cart not found.');
-        }
-
-        $up = $db->prepare("UPDATE held_carts SET status = 'Resumed', resumed_at = NOW() WHERE id = :id");
-        $up->bindValue(':id', $id, PDO::PARAM_INT);
-        $up->execute();
-
-        echo json_encode(['success' => true, 'data' => $row]);
         exit;
     }
 
