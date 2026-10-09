@@ -119,6 +119,7 @@ foreach($salesChartData as $data) {
         <div class="row g-4">
             <!-- Main Actions Column -->
             <div class="col-lg-8">
+                <?php render_role_home($db); ?>
                 <?php render_operation_groups(); ?>
 
                 <!-- Sales Chart -->

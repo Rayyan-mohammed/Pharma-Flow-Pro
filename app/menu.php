@@ -21,9 +21,9 @@ function app_operations() {
     return [
         ['sell', 'New sale',            'Bill a customer, apply discount and print the invoice', 'bi-cart-plus',        'sales/sell_medicine.php',                 $all, 'sales.create',      'bill billing invoice checkout pos cart sell'],
         ['sell', 'Sales records',       'Find any invoice and reprint it',                       'bi-receipt',          'sales/sales_records.php',                 $all, null,                'invoices history reprint sold'],
-        ['sell', 'Returns and refunds', 'Take back a sold item and refund it',                   'bi-arrow-return-left','sales/returns.php',                       $ap,  null,                'return refund customer back'],
+        ['sell', 'Returns and refunds', 'Take back a sold item; the pharmacist approves refunds','bi-arrow-return-left','sales/returns.php',                       $all,  null,                'return refund customer back'],
         ['sell', 'Prescriptions',       'Record and track doctor prescriptions',                 'bi-file-earmark-medical','prescription/prescription-management.php', $all, null,                'doctor patient rx'],
-        ['sell', 'Customers',           'Customer ledger with visits and spending',              'bi-people',           'settings/customer_ledger.php',            $ap,  null,                'ledger patient mobile'],
+        ['sell', 'Customers',           'Find a customer by name or mobile; see their visits',   'bi-people',           'settings/customer_ledger.php',            $all,  null,                'ledger patient mobile'],
 
         ['inventory', 'Stock overview',       'Search medicines and see what is in stock',       'bi-search',           'check/check-stock.php',                   $all, null,                'check available quantity find medicine'],
         ['inventory', 'Add medicine',         'Create a new medicine with batch and expiry',     'bi-plus-circle',      'add/add-medicine.php',                    $ap,  null,                'new create item'],
@@ -48,7 +48,7 @@ function app_operations() {
         ['reports', 'Stock analytics',        'Turnover, dead stock and fast movers',            'bi-activity',         'settings/stock_analytics.php',            $ap,  null,                'turnover movement dead fast'],
         ['reports', 'Financial reports',      'Profit and loss, tax and cash flow',              'bi-cash-coin',        'settings/financial_reports.php',          $ap,  'settings.financial','profit loss gst tax expense'],
 
-        ['admin', 'Cash register',            'Open and close the day, count the drawer',        'bi-calculator',       'settings/cash_register.php',              $a,   null,                'cash drawer opening closing balance'],
+        ['admin', 'Cash register',            'Open and close the day, count the drawer',        'bi-calculator',       'settings/cash_register.php',              $ap,  null,                'cash drawer opening closing balance'],
         ['admin', 'Users',                    'Staff accounts, roles and passwords',             'bi-person-gear',      'users/manage_users.php',                  $a,   'users.manage',      'staff accounts roles password'],
         ['admin', 'Add user',                 'Give someone a login',                            'bi-person-plus',      'users/add_user.php',                      $a,   'users.manage',      'new staff create account'],
         ['admin', 'Activity log',             'Who did what, and when',                          'bi-journal-text',     'users/activity_log.php',                  $a,   null,                'audit history log'],
@@ -193,4 +193,72 @@ function render_operation_groups() {
         }
         echo '</div></section>';
     }
+}
+
+/**
+ * What each role reaches for most in a real pharmacy shop, in the order they use it.
+ *  Staff (counter assistant): bill, look up stock and price, reprint, take back, record prescriptions, find customers.
+ *  Pharmacist (in charge):    bill, restock and receive purchases, watch expiry, approve returns, reorder.
+ *  Administrator (owner):     see how the shop is doing, cash, money reports, people, backups.
+ */
+function app_featured_paths() {
+    return [
+        'Staff'         => ['sales/sell_medicine.php', 'check/check-stock.php', 'sales/sales_records.php', 'prescription/prescription-management.php', 'sales/returns.php', 'settings/customer_ledger.php'],
+        'Pharmacist'    => ['sales/sell_medicine.php', 'update/update-stock.php', 'purchase/purchase-management.php', 'expiration/expiration-management.php', 'sales/returns.php', 'inventory/reorder_suggestions.php'],
+        'Administrator' => ['sales/sell_medicine.php', 'statistics/statistics.php', 'settings/cash_register.php', 'settings/financial_reports.php', 'users/manage_users.php', 'settings/backup_restore.php'],
+    ];
+}
+
+function app_role_headline() {
+    $role = $_SESSION['currentUser']['role'] ?? '';
+    $map = [
+        'Staff'         => ['At the counter',    'The things you do all day'],
+        'Pharmacist'    => ['Your shift',        'Dispensing, stock and approvals'],
+        'Administrator' => ['Running the store', 'How the shop is doing, and who can do what'],
+    ];
+    return $map[$role] ?? ['Most used', ''];
+}
+
+/** Today's numbers. Staff see counts only, never money or cost. */
+function render_today_strip($db) {
+    $role = $_SESSION['currentUser']['role'] ?? '';
+    $tiles = [];
+    try {
+        $r = $db->query("SELECT COUNT(DISTINCT COALESCE(NULLIF(invoice_number, ''), CONCAT('s', id))) AS bills, COALESCE(SUM(quantity), 0) AS items, COALESCE(SUM(total_price), 0) AS revenue FROM sales WHERE DATE(sale_date) = CURDATE()")->fetch(PDO::FETCH_ASSOC);
+        $tiles[] = ['Bills today', number_format((int)$r['bills']), 'bi-receipt'];
+        $tiles[] = ['Items sold today', number_format((int)$r['items']), 'bi-bag-check'];
+        if ($role !== 'Staff') $tiles[] = ['Sales today', '₹' . number_format((float)$r['revenue'], 0), 'bi-cash-stack'];
+        $p = (int)$db->query("SELECT COUNT(*) FROM `returns` WHERE status = 'pending'")->fetchColumn();
+        $tiles[] = [$role === 'Staff' ? 'Returns waiting' : 'Returns to approve', number_format($p), 'bi-arrow-return-left'];
+        if ($role !== 'Staff') {
+            $e = (int)$db->query("SELECT COUNT(*) FROM medicine_batches WHERE quantity > 0 AND expiration_date BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 30 DAY)")->fetchColumn();
+            $tiles[] = ['Expiring in 30 days', number_format($e), 'bi-hourglass-split'];
+        }
+    } catch (Exception $e) {
+        return;
+    }
+    echo '<div class="today">';
+    foreach ($tiles as $t) {
+        echo '<div class="today-t"><i class="bi ' . app_esc($t[2]) . '"></i><span class="mono">' . app_esc($t[0]) . '</span><b>' . app_esc($t[1]) . '</b></div>';
+    }
+    echo '</div>';
+}
+
+/** Today strip plus the role's most used operations, shown above the full grouped list. */
+function render_role_home($db) {
+    render_today_strip($db);
+    $role = $_SESSION['currentUser']['role'] ?? '';
+    $featured = app_featured_paths();
+    $want = $featured[$role] ?? [];
+    $byPath = [];
+    foreach (app_visible_operations() as $op) $byPath[$op['path']] = $op;
+    $cards = [];
+    foreach ($want as $path) if (isset($byPath[$path])) $cards[] = $byPath[$path];
+    if (!$cards) return;
+    $h = app_role_headline();
+    echo '<section class="feat-wrap"><header class="ops-head"><span class="mono">Most used</span><div><h3>' . app_esc($h[0]) . '</h3><p>' . app_esc($h[1]) . '</p></div></header><div class="feat-grid">';
+    foreach ($cards as $i => $op) {
+        echo '<a class="feat' . ($i === 0 ? ' feat-main' : '') . '" href="' . app_esc($op['href']) . '"><span class="op-ic"><i class="bi ' . app_esc($op['icon']) . '"></i></span><b>' . app_esc($op['label']) . '</b><small>' . app_esc($op['desc']) . '</small></a>';
+    }
+    echo '</div></section>';
 }

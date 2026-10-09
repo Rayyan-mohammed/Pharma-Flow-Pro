@@ -103,6 +103,7 @@ $lowStockItems = $medicine->getLowStockItems();
         <div class="row g-4">
             <!-- Quick Actions -->
             <div class="col-lg-8">
+                <?php render_role_home($db); ?>
                 <?php render_operation_groups(); ?>
             </div>
 

@@ -279,3 +279,21 @@ hr { border-color: var(--border); opacity: 1; }
 .card.bg-primary.text-white *, .welcome-banner * { background: none !important; }
 .card.bg-primary.text-white .card-body { position: relative; z-index: 1; }
 .card.bg-primary.text-white h4, .card.bg-primary.text-white p, .card.bg-primary.text-white .card-body { background: none !important; }
+
+/* ---------- role home: today's numbers and most used operations ---------- */
+.today { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 26px; }
+.today-t { position: relative; background: var(--bg-card); border: 1px solid var(--border); border-radius: 18px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; }
+.today-t i { position: absolute; right: 14px; top: 14px; color: var(--primary); font-size: 18px; opacity: .8; }
+.today-t .mono { color: var(--text-secondary); font-size: 10.5px; padding-right: 26px; }
+.today-t b { font-size: 28px; letter-spacing: -.045em; font-weight: 650; line-height: 1.05; }
+.feat-wrap { margin-bottom: 32px; }
+.feat-wrap .ops-head .mono { color: #d97706; }
+.feat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 12px; }
+.feat { display: flex; flex-direction: column; gap: 6px; padding: 18px; border-radius: 22px; background: var(--bg-card); border: 1px solid var(--border); text-decoration: none; color: var(--text-primary); transition: background .25s, color .25s, border-color .25s, transform .25s; min-height: 150px; }
+.feat .op-ic { margin-bottom: 10px; }
+.feat b { font-size: 17px; letter-spacing: -.025em; font-weight: 640; }
+.feat small { color: var(--text-secondary); font-size: 12.8px; line-height: 1.3; transition: color .25s; }
+.feat:hover, .feat-main { background: var(--frame); color: var(--on-dark); border-color: var(--frame); }
+.feat:hover small, .feat-main small { color: var(--on-dark-muted); }
+.feat:hover { transform: translateY(-3px); }
+.feat:hover .op-ic, .feat-main .op-ic { background: var(--teal); color: var(--frame); }
