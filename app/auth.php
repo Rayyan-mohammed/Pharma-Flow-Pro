@@ -91,3 +91,4 @@ function checkPermission($permissionKey) {
     }
 }
 
+require_once __DIR__ . '/menu.php';
