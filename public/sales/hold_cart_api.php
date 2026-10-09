@@ -26,7 +26,7 @@ try {
         $customerName = trim($payload['customer_name'] ?? '');
         $customerPhone = trim($payload['customer_phone'] ?? '');
 
-        $holdCode = 'HOLD-' . date('His') . '-' . rand(100, 999);
+        $holdCode = 'HOLD-' . date('His') . '-' . strtoupper(bin2hex(random_bytes(4)));
         $ins = $db->prepare("INSERT INTO held_carts (hold_code, customer_name, customer_phone, cart_json, bill_snapshot_json, status, created_by) VALUES (:hold_code, :customer_name, :customer_phone, :cart_json, :bill_snapshot_json, 'Held', :created_by)");
         $ins->bindValue(':hold_code', $holdCode);
         $ins->bindValue(':customer_name', $customerName ?: null);
@@ -58,7 +58,7 @@ try {
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        if (!$row) {
+        if (!$row || ((int)$row['created_by'] !== $userId && !hasRole('Administrator'))) {
             throw new Exception('Held cart not found.');
         }
 
