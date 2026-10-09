@@ -1,5 +1,6 @@
 <?php
 require_once '../../app/auth.php';
+checkRole(['Administrator']);
 
 header('Content-Type: application/json');
 
