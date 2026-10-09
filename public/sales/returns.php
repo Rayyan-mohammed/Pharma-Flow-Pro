@@ -45,6 +45,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 } else {
                     $unitPrice = $sale['unit_price'] ?? ($sale['total_price'] / $sale['quantity']);
                     $refundAmount = $unitPrice * $quantity;
+                    // Scale by the invoice's discount and tax so a discounted sale is not over-refunded
+                    $invSubtotal = (float)($sale['subtotal'] ?? 0);
+                    $invNet = (float)($sale['net_total'] ?? 0);
+                    if ($invSubtotal > 0 && $invNet > 0) {
+                        $refundAmount = round($refundAmount * ($invNet / $invSubtotal), 2);
+                    }
                     $originalPaymentMethod = $sale['payment_method'] ?? 'Cash';
                     if ($returns->create($saleId, $sale['medicine_id'], $quantity, $reason, $refundAmount, $originalPaymentMethod)) {
                         $message = 'Return request created successfully.';
