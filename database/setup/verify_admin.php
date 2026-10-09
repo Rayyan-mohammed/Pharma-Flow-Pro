@@ -1,4 +1,5 @@
 <?php
+if (PHP_SAPI !== 'cli') { http_response_code(403); exit('Run this script from the command line.'); }
 require_once __DIR__ . '/../../app/init.php';
 
 $database = new Database();
@@ -11,7 +12,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if ($user) {
     echo "VERIFICATION SUCCESSFUL:\n";
-    echo "ID: " . $user['id'] . "\n";
+    echo "ID: " . $user['user_id'] . "\n";
     echo "Email: " . $user['email'] . "\n";
     echo "Role: " . $user['role'] . "\n";
     echo "Status: Active in Database\n";

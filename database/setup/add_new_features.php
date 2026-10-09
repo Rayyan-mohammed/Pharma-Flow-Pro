@@ -1,4 +1,5 @@
 <?php
+if (PHP_SAPI !== 'cli') { http_response_code(403); exit('Run this script from the command line.'); }
 /**
  * Database migration for new features:
  * 1. medicine_categories table

@@ -1,12 +1,13 @@
 <?php
+if (PHP_SAPI !== 'cli') { http_response_code(403); exit('Run this script from the command line.'); }
 require_once __DIR__ . '/../../app/init.php';
 
 $database = new Database();
 $db = $database->getConnection();
 $user = new User($db);
 
-$email = 'admin1@pharmacy.com';
-$password = 'admin123';
+$email = $argv[2] ?? 'admin1@pharmacy.com'; // optional second argument: an existing admin's email
+$password = $argv[1] ?? bin2hex(random_bytes(6)); // pass a password as the first argument, or one is generated
 $role = 'Administrator';
 
 // Check if admin exists

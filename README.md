@@ -125,15 +125,19 @@ app/Config/config.php
 
 5. Run migration scripts in browser (recommended):
 
-```text
-http://localhost/pharmaflow_pro/database/setup/migrate.php
+```bash
+php database/setup/migrate.php
 ```
+
+Setup scripts are command-line only and return 403 when requested over HTTP.
 
 6. Seed or reset default admin account (optional but useful for first login):
 
-```text
-http://localhost/pharmaflow_pro/database/setup/seed_admin.php
+```bash
+php database/setup/seed_admin.php "<strong-password>" you@example.com
 ```
+
+Without an argument a random password is generated and printed.
 
 7. Verify admin account exists (optional):
 

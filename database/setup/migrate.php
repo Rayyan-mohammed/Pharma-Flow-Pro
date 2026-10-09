@@ -1,4 +1,5 @@
 <?php
+if (PHP_SAPI !== 'cli') { http_response_code(403); exit('Run this script from the command line.'); }
 /**
  * Database Migration Script
  * Adds missing tables, columns, and indexes to bring the database up to date.

@@ -1,4 +1,5 @@
 <?php
+if (PHP_SAPI !== 'cli') { http_response_code(403); exit('Run this script from the command line.'); }
 // Include database connection
 require_once 'app/init.php';
 

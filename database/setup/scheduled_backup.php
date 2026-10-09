@@ -1,4 +1,5 @@
 <?php
+if (PHP_SAPI !== 'cli') { http_response_code(403); exit('Run this script from the command line.'); }
 // CLI utility for scheduled backups with retention and backup_runs registry.
 require_once __DIR__ . '/../../app/Config/config.php';
 require_once __DIR__ . '/../../app/Core/Database.php';
