@@ -96,59 +96,52 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - <?php echo htmlspecialchars(SHOP_SHORT_NAME); ?></title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 rx=%273%27 fill=%27%230d6efd%27/%3E%3Cpath fill=%27white%27 d=%27M8 3.5c-1.2-1.3-3.6-1-4.5.8-.7 1.5-.1 3 .9 4.1L8 12l3.6-3.6c1-1.1 1.6-2.6.9-4.1C11.6 2.5 9.2 2.2 8 3.5z%27/%3E%3C/svg%3E">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Staff login - <?php echo htmlspecialchars(SHOP_SHORT_NAME); ?></title>
+    <meta name="robots" content="noindex">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%278%27 fill=%27%23040a09%27/%3E%3Cpath fill=%27%232dd4bf%27 d=%27M16 24.5 8.4 17c-2.4-2.5-2.2-6.4.5-8.2 2.1-1.4 5-.9 7.1 1.3 2.1-2.2 5-2.7 7.1-1.3 2.7 1.8 2.9 5.7.5 8.2z%27/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="styles.css" rel="stylesheet">
+    <link href="login.css" rel="stylesheet">
 </head>
-<body class="auth-wrapper">
-    <div class="auth-card">
-        <div class="auth-header">
-            <div style="display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:12px;background:var(--primary-50);margin-bottom:1rem;">
-                <i class="bi bi-heart-pulse-fill" style="font-size:1.5rem;color:var(--primary);"></i>
+<body class="login">
+    <aside class="login-side">
+        <span class="orbit o1"><i></i></span>
+        <span class="orbit o2"><i></i></span>
+        <a class="brand" href="index.php"><i class="bi bi-heart-pulse-fill"></i>om sai baba</a>
+        <h1>Welcome<span>back.</span></h1>
+        <div class="meta"><span><?php echo htmlspecialchars(SHOP_NAME); ?></span><span>Wishing you a speedy recovery</span></div>
+    </aside>
+
+    <main class="login-main">
+        <div class="login-box">
+            <span class="kicker rise">Staff area</span>
+            <h2 class="rise d1">Sign in.</h2>
+            <p class="sub rise d2">Use the account the store gave you.</p>
+
+            <?php if (!empty($loginError)): ?>
+                <div class="err" role="alert"><i class="bi bi-exclamation-circle"></i><span><?php echo htmlspecialchars($loginError); ?></span></div>
+            <?php endif; ?>
+
+            <form id="login-form" method="POST" class="rise d3">
+                <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
+                <div class="field">
+                    <label for="email">Email address</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" autocomplete="username" required autofocus>
+                </div>
+                <div class="field">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" autocomplete="current-password" required>
+                </div>
+                <button type="submit" class="go">Sign in <i class="bi bi-arrow-right"></i></button>
+            </form>
+
+            <div class="foot-links rise d4">
+                <span>Need access? Contact your system administrator.</span>
+                <a href="index.php"><i class="bi bi-arrow-left me-1"></i>Back to the store website</a>
             </div>
-            <h3><?php echo htmlspecialchars(SHOP_NAME); ?></h3>
-            <p>Staff sign in</p>
         </div>
-        
-        <div class="card">
-            <div class="card-body">
-                <?php if (!empty($loginError)): ?>
-                    <div class="alert alert-danger d-flex align-items-center gap-2 mb-4">
-                        <i class="bi bi-exclamation-circle"></i>
-                        <span><?php echo htmlspecialchars($loginError); ?></span>
-                    </div>
-                <?php endif; ?>
-
-                <form id="login-form" method="POST">
-                    <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required autofocus>
-                    </div>
-                    <div class="mb-4">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
-                    </div>
-                    <div class="d-grid">
-                        <button type="submit" class="btn btn-primary btn-lg">
-                            Sign in
-                            <i class="bi bi-arrow-right ms-1"></i>
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <p class="text-center mt-4" style="color:var(--text-tertiary);font-size:0.8125rem;">
-            Need access? Contact your system administrator.
-        </p>
-        <p class="text-center mt-2" style="font-size:0.8125rem;">
-            <a href="index.php" style="color:var(--primary);text-decoration:none;"><i class="bi bi-arrow-left me-1"></i>Back to Om Sai Baba Medical Store</a>
-        </p>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </main>
 </body>
 </html>
