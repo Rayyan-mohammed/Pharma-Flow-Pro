@@ -28,7 +28,7 @@ $lowStockItems = $medicine->getLowStockItems();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Staff Dashboard - PharmaFlow Pro</title>
+    <title>Staff Dashboard - <?php echo htmlspecialchars(SHOP_SHORT_NAME); ?></title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 rx=%273%27 fill=%27%230d6efd%27/%3E%3Cpath fill=%27white%27 d=%27M8 3.5c-1.2-1.3-3.6-1-4.5.8-.7 1.5-.1 3 .9 4.1L8 12l3.6-3.6c1-1.1 1.6-2.6.9-4.1C11.6 2.5 9.2 2.2 8 3.5z%27/%3E%3C/svg%3E">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
@@ -38,7 +38,7 @@ $lowStockItems = $medicine->getLowStockItems();
     <nav class="navbar navbar-dark bg-primary">
         <div class="container d-flex justify-content-between align-items-center">
             <a class="navbar-brand fw-bold" href="#">
-                <i class="bi bi-heart-pulse-fill me-2"></i>PharmaFlow Pro
+                <i class="bi bi-heart-pulse-fill me-2"></i><?php echo htmlspecialchars(SHOP_SHORT_NAME); ?>
             </a>
             <div class="d-flex align-items-center gap-2">
                 <div class="position-relative" id="globalSearchWrap">

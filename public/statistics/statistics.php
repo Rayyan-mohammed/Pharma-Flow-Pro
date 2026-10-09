@@ -10,7 +10,7 @@ $userName = htmlspecialchars(!empty($user['first_name']) ? $user['first_name'] :
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analytics Dashboard - PharmaFlow Pro</title>
+    <title>Analytics Dashboard - <?php echo htmlspecialchars(SHOP_SHORT_NAME); ?></title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 rx=%273%27 fill=%27%230d6efd%27/%3E%3Cpath fill=%27white%27 d=%27M8 3.5c-1.2-1.3-3.6-1-4.5.8-.7 1.5-.1 3 .9 4.1L8 12l3.6-3.6c1-1.1 1.6-2.6.9-4.1C11.6 2.5 9.2 2.2 8 3.5z%27/%3E%3C/svg%3E">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
@@ -41,7 +41,7 @@ $userName = htmlspecialchars(!empty($user['first_name']) ? $user['first_name'] :
         .nav-tabs-analytics .nav-link.active { color: var(--primary-color); border-bottom: 2px solid var(--primary-color); background: transparent; }
         .skeleton { background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 8px; height: 20px; }
         @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-        .today-highlight { background: linear-gradient(135deg, #4F46E5, #4338CA); border-radius: 1rem; color: white; }
+        .today-highlight { background: linear-gradient(135deg, #0f766e, #115e59); border-radius: 1rem; color: white; }
         .progress-thin { height: 6px; border-radius: 3px; }
         @media print { .no-print { display: none !important; } .container { max-width: 100%; } }
     </style>
@@ -51,7 +51,7 @@ $userName = htmlspecialchars(!empty($user['first_name']) ? $user['first_name'] :
     <nav class="navbar navbar-dark bg-primary no-print">
         <div class="container">
             <a class="navbar-brand fw-bold" href="../dashboard/dashboard.php">
-                <i class="bi bi-heart-pulse-fill me-2"></i>PharmaFlow Pro
+                <i class="bi bi-heart-pulse-fill me-2"></i><?php echo htmlspecialchars(SHOP_SHORT_NAME); ?>
             </a>
         </div>
     </nav>
@@ -354,12 +354,12 @@ $userName = htmlspecialchars(!empty($user['first_name']) ? $user['first_name'] :
     // ── Chart Instances ─────────────────────────────────
     let charts = {};
     const chartColors = {
-        blue:    { bg: 'rgba(79,70,229,0.15)', border: '#4F46E5' },
+        blue:    { bg: 'rgba(15,118,110,0.15)', border: '#0f766e' },
         green:   { bg: 'rgba(16,185,129,0.15)', border: '#10b981' },
         amber:   { bg: 'rgba(245,158,11,0.15)', border: '#f59e0b' },
         red:     { bg: 'rgba(239,68,68,0.15)',  border: '#ef4444' },
         purple:  { bg: 'rgba(139,92,246,0.15)', border: '#8b5cf6' },
-        palette: ['#4F46E5','#059669','#D97706','#DC2626','#8b5cf6','#0284C7','#f97316','#84cc16','#e879f9','#6366f1']
+        palette: ['#0f766e','#059669','#D97706','#DC2626','#8b5cf6','#0284C7','#f97316','#84cc16','#e879f9','#14b8a6']
     };
 
     const defaultOpts = {

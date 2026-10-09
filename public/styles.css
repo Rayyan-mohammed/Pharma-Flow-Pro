@@ -6,14 +6,18 @@
    ═══════════════════════════════════════════════════════════════ */
 
 :root {
+    --bs-primary: #0f766e;
+    --bs-primary-rgb: 15, 118, 110;
+    --bs-link-color: #0f766e;
+    --bs-link-hover-color: #115e59;
     /* ── Brand Palette ── */
-    --primary: #4F46E5;
-    --primary-light: #6366F1;
-    --primary-dark: #4338CA;
-    --primary-50: #EEF2FF;
-    --primary-100: #E0E7FF;
-    --primary-200: #C7D2FE;
-    --primary-rgb: 79, 70, 229;
+    --primary: #0f766e;
+    --primary-light: #14b8a6;
+    --primary-dark: #115e59;
+    --primary-50: #f0fdfa;
+    --primary-100: #ccfbf1;
+    --primary-200: #99f6e4;
+    --primary-rgb: 15, 118, 110;
 
     /* ── Semantic Colors ── */
     --success: #059669;
@@ -749,7 +753,7 @@ a {
     bottom: 0;
     background:
         radial-gradient(ellipse 80% 60% at 50% -20%, rgba(var(--primary-rgb), 0.08), transparent),
-        radial-gradient(ellipse 60% 40% at 80% 10%, rgba(99, 102, 241, 0.06), transparent);
+        radial-gradient(ellipse 60% 40% at 80% 10%, rgba(20, 184, 166, 0.07), transparent);
     pointer-events: none;
 }
 
@@ -1046,3 +1050,47 @@ h5.text-secondary {
         content: none !important;
     }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   Bootstrap primary colour -> shop teal (covers states Bootstrap
+   colours from its own variables: disabled, outline, checks, pills)
+   ═══════════════════════════════════════════════════════════════ */
+.btn-primary {
+    --bs-btn-bg: var(--primary);
+    --bs-btn-border-color: var(--primary);
+    --bs-btn-hover-bg: var(--primary-dark);
+    --bs-btn-hover-border-color: var(--primary-dark);
+    --bs-btn-active-bg: var(--primary-dark);
+    --bs-btn-active-border-color: var(--primary-dark);
+    --bs-btn-disabled-bg: var(--primary);
+    --bs-btn-disabled-border-color: var(--primary);
+    --bs-btn-focus-shadow-rgb: var(--primary-rgb);
+}
+.btn-outline-primary {
+    --bs-btn-color: var(--primary);
+    --bs-btn-border-color: var(--primary);
+    --bs-btn-hover-bg: var(--primary);
+    --bs-btn-hover-border-color: var(--primary);
+    --bs-btn-active-bg: var(--primary-dark);
+    --bs-btn-active-border-color: var(--primary-dark);
+    --bs-btn-disabled-color: var(--primary);
+    --bs-btn-disabled-border-color: var(--primary);
+    --bs-btn-focus-shadow-rgb: var(--primary-rgb);
+}
+.form-check-input:checked,
+.form-check-input[type="checkbox"]:indeterminate {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+.form-check-input:focus, .form-control:focus, .form-select:focus {
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 0.2rem rgba(var(--primary-rgb), 0.18);
+}
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link,
+.page-item.active .page-link, .list-group-item.active { background-color: var(--primary); border-color: var(--primary); }
+.page-link { color: var(--primary); }
+.progress-bar { background-color: var(--primary); }
+.border-primary { border-color: var(--primary) !important; }
+.link-primary { color: var(--primary) !important; }
+.bg-primary-subtle { background-color: var(--primary-50) !important; }
+.text-bg-primary { background-color: var(--primary) !important; }
