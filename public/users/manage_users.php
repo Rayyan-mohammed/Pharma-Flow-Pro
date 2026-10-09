@@ -42,6 +42,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (empty($data['first_name']) || empty($data['last_name']) || empty($data['email']) || empty($data['role'])) {
             $message = 'Please fill in all required fields.';
             $messageType = 'danger';
+        } elseif (!in_array($data['role'], ['Administrator', 'Pharmacist', 'Staff'], true)) {
+            $message = 'Invalid role.';
+            $messageType = 'danger';
+        } elseif ($targetId === (int)$_SESSION['currentUser']['user_id'] && $data['role'] !== 'Administrator') {
+            $message = 'You cannot remove your own Administrator role.';
+            $messageType = 'danger';
         } elseif ($user->update($targetId, $data)) {
             $message = 'User updated successfully.';
             $messageType = 'success';
