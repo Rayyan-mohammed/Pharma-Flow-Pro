@@ -234,3 +234,15 @@ Internal utility endpoints under `public/api/`:
 No license file is currently included.
 
 If you plan to publish this project, add a LICENSE file and update this section.
+
+## Database user and local secrets
+
+The app should not run as `root`. Create the limited user and write its credentials to the git-ignored `app/Config/config.local.php`:
+
+```bash
+DB_ADMIN_PASS="<database admin password>" php database/setup/create_app_user.php
+```
+
+Set `BACKUP_RESTORE_PASSWORD` in the same file; Backup & Restore refuses to run with the default. Restores and first-time migrations drop or create many tables, so run them with an admin account.
+
+Role permissions (`users.manage`, `backup.restore`, `returns.approve`, `settings.financial`, `purchase.create`, `sales.create`) are enforced by the pages. Review them under Settings > Permissions Matrix after upgrading; an existing database with every box unticked will block Pharmacists and Staff from selling or approving.
