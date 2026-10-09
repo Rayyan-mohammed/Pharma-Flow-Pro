@@ -144,7 +144,7 @@ $detailItems = $detailsPurchaseId > 0 ? $purchase->getPurchaseItems($detailsPurc
                                     <span class="badge bg-<?php echo $cls; ?>"><?php echo htmlspecialchars($r['payment_status']); ?></span>
                                 </td>
                                 <td class="text-end px-3">
-                                    <a class="btn btn-sm btn-outline-primary" href="?<?php echo http_build_query(array_merge($_GET, ['details' => (int)$r['id'])); ?>#details"><i class="bi bi-eye"></i></a>
+                                    <a class="btn btn-sm btn-outline-primary" href="?<?php echo http_build_query(array_merge($_GET, ['details' => (int)$r['id']])); ?>#details"><i class="bi bi-eye"></i></a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
