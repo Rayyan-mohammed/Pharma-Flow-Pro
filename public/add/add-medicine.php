@@ -123,7 +123,7 @@ if($_POST) {
                     <div class="card-body p-4">
                         <?php if($message): ?>
                             <div class="alert alert-<?php echo $message_type; ?> shadow-sm border-0 mb-4">
-                                <i class="bi bi-info-circle me-2"></i><?php echo $message; ?>
+                                <i class="bi bi-info-circle me-2"></i><?php echo htmlspecialchars($message); ?>
                             </div>
                         <?php endif; ?>
                 
