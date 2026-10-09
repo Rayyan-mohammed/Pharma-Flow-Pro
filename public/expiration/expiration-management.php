@@ -1,6 +1,7 @@
 <?php
 require_once '../../app/auth.php';
 checkRole(['Administrator', 'Pharmacist', 'Staff']);
+$showCost = (($_SESSION['currentUser']['role'] ?? '') !== 'Staff'); // purchase prices are not for the counter
 
 $database = new Database();
 $db = $database->getConnection();
@@ -69,8 +70,10 @@ $expired_medicines = $medicine->getExpiredMedicines();
                                 <th class="py-3">Batch No</th>
                                 <th class="py-3">Expiration Date</th>
                                 <th class="py-3 text-center">Quantity</th>
+                                <?php if ($showCost): ?>
                                 <th class="py-3 text-end">Price</th>
                                 <th class="py-3 text-end px-4">Total Value</th>
+                                <?php endif; ?>
                             </tr>
                         </thead>
                         <tbody>
@@ -101,16 +104,18 @@ $expired_medicines = $medicine->getExpiredMedicines();
                                     <td class="text-center">
                                        <span class="fw-bold"><?php echo $qty; ?></span>
                                     </td>
+                                    <?php if ($showCost): ?>
                                     <td class="text-end text-muted">₹<?php echo number_format($price, 2); ?></td>
                                     <td class="text-end fw-bold px-4">₹<?php echo number_format($value, 2); ?></td>
+                                    <?php endif; ?>
                                 </tr>
                             <?php endwhile; ?>
                             
                             <?php if(!$has_expired): ?>
-                                <tr><td colspan="6" class="text-center py-4 text-muted">No expired medicines found. Good job!</td></tr>
+                                <tr><td colspan="<?php echo $showCost ? 6 : 4; ?>" class="text-center py-4 text-muted">No expired medicines found. Good job!</td></tr>
                             <?php endif; ?>
                         </tbody>
-                        <?php if($has_expired): ?>
+                        <?php if($has_expired && $showCost): ?>
                         <tfoot class="bg-light">
                              <tr>
                                 <td colspan="5" class="text-end fw-bold py-3">Total Value of Expired Stock:</td>

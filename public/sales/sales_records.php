@@ -171,9 +171,11 @@ while ($row = $medStmt->fetch(PDO::FETCH_ASSOC)) {
                 <p class="text-secondary mb-0">Overview of transactions and revenue.</p>
             </div>
             <div class="col-auto d-flex gap-2 align-items-center">
+                <?php if ($userRole !== 'Staff'): ?>
                 <a href="../api/export_csv.php?type=sales<?php echo $startDate ? '&start_date=' . urlencode($startDate) : ''; ?><?php echo $endDate ? '&end_date=' . urlencode($endDate) : ''; ?><?php echo ($hasPaymentMethod && $paymentMethod) ? '&payment_method=' . urlencode($paymentMethod) : ''; ?>" class="btn btn-success">
                     <i class="bi bi-file-earmark-spreadsheet me-2"></i>Export CSV
                 </a>
+                <?php endif; ?>
                 <button class="btn btn-outline-primary" onclick="window.print()">
                     <i class="bi bi-printer me-2"></i>Print Report
                 </button>
