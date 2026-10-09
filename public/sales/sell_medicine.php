@@ -81,8 +81,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     continue;
                  }
 
-                 $start_stock = $medicine->stock;
-                 if ($start_stock < $quantity) {
+                 // Only unexpired batches can be sold (matches FIFO deduction)
+                 $availStmt = $db->prepare("SELECT COALESCE(SUM(quantity), 0) FROM medicine_batches WHERE medicine_id = :mid AND expiration_date >= CURDATE()");
+                 $availStmt->bindValue(':mid', $medicine_id, PDO::PARAM_INT);
+                 $availStmt->execute();
+                 $start_stock = (int)$availStmt->fetchColumn();
+                 $already_in_cart = 0;
+                 foreach ($prepared_sales as $ps) {
+                    if ($ps['medicine_id'] === $medicine_id) {
+                        $already_in_cart += $ps['quantity'];
+                    }
+                 }
+                 if ($start_stock < $quantity + $already_in_cart) {
                     $errors[] = "Insufficient stock for " . $medicine->name;
                     continue;
                  }
@@ -225,7 +235,7 @@ $medicines = $medicine->read();
             <div class="alert alert-success d-flex align-items-center mb-4">
                 <i class="bi bi-check-circle-fill me-2 fs-5"></i>
                 <div>
-                    <?php echo $message; ?>
+                    <?php echo htmlspecialchars($message); ?>
                     <?php if(!empty($ids_str)): ?>
                         <div class="mt-2">
                             <a href="invoice.php?invoice=<?php echo urlencode($invoice_number); ?>&ids=<?php echo urlencode($ids_str); ?>" target="_blank" class="btn btn-sm btn-success fw-bold"><i class="bi bi-printer me-1"></i>Print Invoice</a>
@@ -235,7 +245,7 @@ $medicines = $medicine->read();
             </div>
         <?php endif; ?>
         <?php if ($error): ?>
-            <div class="alert alert-danger mb-4"><i class="bi bi-exclamation-triangle-fill me-2"></i><?php echo $error; ?></div>
+            <div class="alert alert-danger mb-4"><i class="bi bi-exclamation-triangle-fill me-2"></i><?php echo htmlspecialchars($error); ?></div>
         <?php endif; ?>
 
         <div class="row g-4">
