@@ -9,6 +9,38 @@ if (!isset($_SESSION['currentUser'])) {
     exit();
 }
 
+// Re-check the account on every request so deactivation, role changes and
+// password resets take effect immediately instead of when the session expires.
+try {
+    $authDb = (new Database())->getConnection();
+    $authStmt = $authDb->prepare("SELECT role, is_active, branch_id, password_hash FROM users WHERE user_id = :id LIMIT 1");
+    $authStmt->bindValue(':id', (int)($_SESSION['currentUser']['user_id'] ?? 0), PDO::PARAM_INT);
+    $authStmt->execute();
+    $authRow = $authStmt->fetch(PDO::FETCH_ASSOC);
+} catch (Exception $e) {
+    $authRow = false;
+}
+if (!$authRow || (int)$authRow['is_active'] !== 1) {
+    $_SESSION = [];
+    session_destroy();
+    header('Location: ' . BASE_URL . '/index.php');
+    exit();
+}
+// A changed password ends sessions that were opened with the old one.
+$sessionPwFingerprint = $_SESSION['pw_fingerprint'] ?? null;
+$currentPwFingerprint = hash('sha256', $authRow['password_hash']);
+if ($sessionPwFingerprint === null) {
+    $_SESSION['pw_fingerprint'] = $currentPwFingerprint;
+} elseif (!hash_equals($sessionPwFingerprint, $currentPwFingerprint)) {
+    $_SESSION = [];
+    session_destroy();
+    header('Location: ' . BASE_URL . '/index.php');
+    exit();
+}
+$_SESSION['currentUser']['role'] = $authRow['role'];
+$_SESSION['currentUser']['branch_id'] = $authRow['branch_id'];
+unset($_SESSION['currentUser']['password_hash']);
+
 function hasRole($allowedRoles) {
     if (!is_array($allowedRoles)) {
         $allowedRoles = [$allowedRoles];

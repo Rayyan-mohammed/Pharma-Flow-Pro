@@ -60,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $hash = password_hash($newPassword, PASSWORD_DEFAULT);
             if ($user->changePassword($userId, $hash)) {
+                $_SESSION['pw_fingerprint'] = hash('sha256', $hash); // keep this session, end the others
                 $message = 'Password changed successfully.';
                 $messageType = 'success';
             } else {
