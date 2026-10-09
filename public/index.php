@@ -13,29 +13,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'] ?? '';
     
     if (!empty($email) && !empty($password)) {
-        // Rate limiting: check failed attempts
+        // Rate limiting: failed attempts are stored in the database, keyed by client
+        // address and by account, so dropping the session cookie does not reset them.
         $maxAttempts = 5;
         $lockoutMinutes = 15;
-        if (!isset($_SESSION['login_attempts'])) {
-            $_SESSION['login_attempts'] = [];
+        $clientIp = get_client_ip();
+        $emailKey = strtolower(trim($email));
+        $failedCount = 0;
+        try {
+            $db->exec("CREATE TABLE IF NOT EXISTS login_attempts (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                ip_address VARCHAR(45) NOT NULL,
+                email VARCHAR(255) NOT NULL,
+                attempted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                INDEX idx_login_attempts_ip (ip_address, attempted_at),
+                INDEX idx_login_attempts_email (email, attempted_at)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+            $db->exec("DELETE FROM login_attempts WHERE attempted_at < (NOW() - INTERVAL 1 DAY)");
+            $cnt = $db->prepare("SELECT COUNT(*) FROM login_attempts WHERE attempted_at > (NOW() - INTERVAL $lockoutMinutes MINUTE) AND (ip_address = :ip OR email = :email)");
+            $cnt->execute([':ip' => $clientIp, ':email' => $emailKey]);
+            $failedCount = (int)$cnt->fetchColumn();
+        } catch (Exception $e) {
+            error_log('Login throttle unavailable: ' . $e->getMessage());
         }
-        // Clean old attempts
-        $_SESSION['login_attempts'] = array_filter($_SESSION['login_attempts'], function($t) use ($lockoutMinutes) {
-            return $t > time() - ($lockoutMinutes * 60);
-        });
-        
-        if (count($_SESSION['login_attempts']) >= $maxAttempts) {
+
+        if ($failedCount >= $maxAttempts) {
             $loginError = "Too many failed attempts. Please try again in $lockoutMinutes minutes.";
         } else {
             $userData = $user->login($email, $password);
-            
+
             if ($userData) {
-                // Clear failed attempts on success
-                unset($_SESSION['login_attempts']);
-                
+                try {
+                    $clr = $db->prepare("DELETE FROM login_attempts WHERE ip_address = :ip OR email = :email");
+                    $clr->execute([':ip' => $clientIp, ':email' => $emailKey]);
+                } catch (Exception $e) {}
+
                 // Regenerate session ID to prevent session fixation
                 session_regenerate_id(true);
-                
+
+                // Keep the password hash out of the session; remember its fingerprint
+                // so a later password change ends this session.
+                $_SESSION['pw_fingerprint'] = hash('sha256', $userData['password_hash']);
+                unset($userData['password_hash']);
                 $_SESSION['currentUser'] = $userData;
             
             // Log login activity
@@ -56,7 +75,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
         } else {
             // Track failed attempt
-            $_SESSION['login_attempts'][] = time();
+            try {
+                $rec = $db->prepare("INSERT INTO login_attempts (ip_address, email) VALUES (:ip, :email)");
+                $rec->execute([':ip' => $clientIp, ':email' => $emailKey]);
+            } catch (Exception $e) {}
             $loginError = 'Invalid email or password.';
         }
         }
