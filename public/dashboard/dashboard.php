@@ -8,7 +8,7 @@ if (!isset($_SESSION['currentUser']) || $_SESSION['currentUser']['role'] !== 'Ad
     } elseif ($_SESSION['currentUser']['role'] === 'Staff') {
         header('Location: staff_dashboard.php');
     } else {
-        header('Location: ../index.php');
+        header('Location: ../login.php');
     }
     exit();
 }

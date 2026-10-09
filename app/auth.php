@@ -5,7 +5,7 @@ require_once __DIR__ . '/init.php';
 if (!isset($_SESSION['currentUser'])) {
     // Redirect to login page
     // Adjust path if necessary or use absolute URL
-    header('Location: ' . BASE_URL . '/index.php');
+    header('Location: ' . BASE_URL . '/login.php');
     exit();
 }
 
@@ -23,7 +23,7 @@ try {
 if (!$authRow || (int)$authRow['is_active'] !== 1) {
     $_SESSION = [];
     session_destroy();
-    header('Location: ' . BASE_URL . '/index.php');
+    header('Location: ' . BASE_URL . '/login.php');
     exit();
 }
 // A changed password ends sessions that were opened with the old one.
@@ -34,7 +34,7 @@ if ($sessionPwFingerprint === null) {
 } elseif (!hash_equals($sessionPwFingerprint, $currentPwFingerprint)) {
     $_SESSION = [];
     session_destroy();
-    header('Location: ' . BASE_URL . '/index.php');
+    header('Location: ' . BASE_URL . '/login.php');
     exit();
 }
 $_SESSION['currentUser']['role'] = $authRow['role'];
