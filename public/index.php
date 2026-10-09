@@ -21,6 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $emailKey = strtolower(trim($email));
         $failedCount = 0;
         try {
+            // Normally created by migrate.php; the app user may lack CREATE privilege
+            try {
             $db->exec("CREATE TABLE IF NOT EXISTS login_attempts (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 ip_address VARCHAR(45) NOT NULL,
@@ -29,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 INDEX idx_login_attempts_ip (ip_address, attempted_at),
                 INDEX idx_login_attempts_email (email, attempted_at)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+            } catch (Exception $e) {}
             $db->exec("DELETE FROM login_attempts WHERE attempted_at < (NOW() - INTERVAL 1 DAY)");
             $cnt = $db->prepare("SELECT COUNT(*) FROM login_attempts WHERE attempted_at > (NOW() - INTERVAL $lockoutMinutes MINUTE) AND (ip_address = :ip OR email = :email)");
             $cnt->execute([':ip' => $clientIp, ':email' => $emailKey]);

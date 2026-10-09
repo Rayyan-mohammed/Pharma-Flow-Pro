@@ -260,6 +260,16 @@ $migrations = [
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4",
 
+    // failed login tracking for the login throttle
+    "CREATE TABLE IF NOT EXISTS login_attempts (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        ip_address VARCHAR(45) NOT NULL,
+        email VARCHAR(255) NOT NULL,
+        attempted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        INDEX idx_login_attempts_ip (ip_address, attempted_at),
+        INDEX idx_login_attempts_email (email, attempted_at)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4",
+
     // optional operating expense log for P&L-lite
     "CREATE TABLE IF NOT EXISTS expense_entries (
         id INT AUTO_INCREMENT PRIMARY KEY,
