@@ -101,7 +101,7 @@ $medicines = $medicine->read()->fetchAll(PDO::FETCH_ASSOC);
 
                         <div class="table-responsive mb-3">
                             <table class="table table-sm" id="returnItemsTable">
-                                <thead class="table-light"><tr><th>Medicine</th><th>Batch</th><th class="text-end">Qty</th><th class="text-end">Cost</th><th class="text-end">Line</th><th></th></tr></thead>
+                                <thead class="table-light"><tr><th style="min-width:200px;">Medicine</th><th style="min-width:140px;">Batch</th><th class="text-end" style="min-width:90px;">Qty</th><th class="text-end" style="min-width:110px;">Cost</th><th class="text-end" style="min-width:110px;">Line</th><th></th></tr></thead>
                                 <tbody></tbody>
                             </table>
                         </div>

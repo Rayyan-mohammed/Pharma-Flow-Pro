@@ -221,6 +221,9 @@ body.palette-open { overflow: hidden; }
 .form-control, .form-select { background-color: #f4f8f7; border: 1px solid var(--border); border-radius: 14px; padding: .7rem 1rem; font-size: .95rem; }
 .form-control:focus, .form-select:focus { background-color: #fff; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(15, 118, 110, .14); }
 .form-control-sm, .form-select-sm { border-radius: 12px; padding: .4rem .8rem; }
+/* keep room for the dropdown arrow; the shared padding above would otherwise put text under it */
+.form-select { padding-right: 2.5rem; background-position: right .9rem center; }
+.form-select-sm { padding-right: 2rem; background-position: right .6rem center; }
 .form-label { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--text-secondary); font-weight: 500; }
 .input-group-text { background: var(--bg-inset); border: 1px solid var(--border); border-radius: 14px; }
 .input-group > .form-control { border-radius: 14px; }

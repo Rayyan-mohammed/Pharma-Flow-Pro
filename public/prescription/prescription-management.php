@@ -128,7 +128,7 @@ $medicines_list = $medicine->read();
                         <div class="col-md-9">
                             <div class="input-group">
                                 <span class="input-group-text bg-light"><i class="bi bi-search"></i></span>
-                                <input type="text" class="form-control" name="search" placeholder="Search by patient or doctor name..." value="<?php echo htmlspecialchars($search); ?>">
+                                <input type="text" class="form-control" name="search" placeholder="Patient or doctor name" value="<?php echo htmlspecialchars($search); ?>">
                             </div>
                         </div>
                         <div class="col-md-3">

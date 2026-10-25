@@ -100,10 +100,10 @@ $exportBills = '../api/export_csv.php?type=purchases&payment_status=Pending';
     </div>
 
     <div class="card border-0 shadow-sm">
-        <div class="card-header bg-white d-flex justify-content-between align-items-center">
+        <div class="card-header bg-white d-flex flex-wrap gap-2 justify-content-between align-items-center">
             <h6 class="mb-0 text-primary">Outstanding Bills</h6>
             <form method="GET" class="d-flex gap-2">
-                <select class="form-select form-select-sm" name="supplier_id">
+                <select class="form-select form-select-sm" name="supplier_id" style="min-width:170px;">
                     <option value="">All Suppliers</option>
                     <?php foreach ($suppliers as $s): ?>
                         <option value="<?php echo (int)$s['id']; ?>" <?php echo $supplierId === (int)$s['id'] ? 'selected' : ''; ?>><?php echo htmlspecialchars($s['name']); ?></option>

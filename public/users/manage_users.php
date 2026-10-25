@@ -250,7 +250,7 @@ foreach ($roleCounts as $rc) {
                                                         <label class="form-label">Email *</label>
                                                         <input type="email" name="email" class="form-control" value="<?php echo htmlspecialchars($u['email']); ?>" required>
                                                     </div>
-                                                    <div class="col-6">
+                                                    <div class="col-sm-6">
                                                         <label class="form-label">Role *</label>
                                                         <select name="role" class="form-select" required>
                                                             <option value="Administrator" <?php echo $u['role']==='Administrator'?'selected':''; ?>>Administrator</option>
@@ -258,7 +258,7 @@ foreach ($roleCounts as $rc) {
                                                             <option value="Staff" <?php echo $u['role']==='Staff'?'selected':''; ?>>Staff</option>
                                                         </select>
                                                     </div>
-                                                    <div class="col-6">
+                                                    <div class="col-sm-6">
                                                         <label class="form-label">Phone</label>
                                                         <input type="text" name="phone" class="form-control" value="<?php echo htmlspecialchars($u['phone'] ?? ''); ?>">
                                                     </div>

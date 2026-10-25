@@ -126,13 +126,13 @@ $dueSummary = $purchase->getSupplierDueSummary();
                             <table class="table table-sm align-middle" id="purchaseItemsTable">
                                 <thead class="table-light">
                                     <tr>
-                                        <th>Medicine</th>
-                                        <th>Batch</th>
-                                        <th>Expiry</th>
-                                        <th>Qty</th>
-                                        <th>Cost</th>
-                                        <th>Sale</th>
-                                        <th>Total</th>
+                                        <th style="min-width:200px;">Medicine</th>
+                                        <th style="min-width:180px;">Batch</th>
+                                        <th style="min-width:150px;">Expiry</th>
+                                        <th style="min-width:90px;">Qty</th>
+                                        <th style="min-width:110px;">Cost</th>
+                                        <th style="min-width:110px;">Sale</th>
+                                        <th style="min-width:110px;">Total</th>
                                         <th></th>
                                     </tr>
                                 </thead>
