@@ -88,7 +88,7 @@ $dueSummary = $purchase->getSupplierDueSummary();
     <?php endif; ?>
 
     <div class="row g-4">
-        <div class="col-lg-8">
+        <div class="col-12">
             <div class="card border-0 shadow-sm">
                 <div class="card-header bg-white"><h5 class="mb-0 text-primary">New Purchase Entry</h5></div>
                 <div class="card-body">
@@ -117,16 +117,16 @@ $dueSummary = $purchase->getSupplierDueSummary();
                         </div>
 
                         <div class="table-responsive mb-3">
-                            <table class="table table-sm align-middle" id="purchaseItemsTable">
+                            <table class="table table-sm align-middle line-items" id="purchaseItemsTable">
                                 <thead class="table-light">
                                     <tr>
-                                        <th style="min-width:200px;">Medicine</th>
-                                        <th style="min-width:180px;">Batch</th>
-                                        <th style="min-width:150px;">Expiry</th>
-                                        <th style="min-width:90px;">Qty</th>
-                                        <th style="min-width:110px;">Cost</th>
-                                        <th style="min-width:110px;">Sale</th>
-                                        <th style="min-width:110px;">Total</th>
+                                        <th class="col-medicine">Medicine</th>
+                                        <th class="col-batch">Batch</th>
+                                        <th class="col-expiry">Expiry</th>
+                                        <th class="col-qty">Qty</th>
+                                        <th class="col-money">Cost</th>
+                                        <th class="col-money">Sale</th>
+                                        <th class="col-money">Total</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -173,8 +173,8 @@ $dueSummary = $purchase->getSupplierDueSummary();
             </div>
         </div>
 
-        <div class="col-lg-4">
-            <div class="card border-0 shadow-sm mb-4">
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm h-100">
                 <div class="card-header bg-white"><h6 class="mb-0 text-primary">Supplier Due Summary</h6></div>
                 <div class="card-body p-0">
                     <div class="table-responsive">
@@ -193,8 +193,10 @@ $dueSummary = $purchase->getSupplierDueSummary();
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="card border-0 shadow-sm">
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm h-100">
                 <div class="card-header bg-white"><h6 class="mb-0 text-primary">Recent Purchases</h6></div>
                 <div class="card-body p-0">
                     <div class="table-responsive">

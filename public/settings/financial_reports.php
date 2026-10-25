@@ -106,7 +106,7 @@ $recentExpenses = $db->query("SELECT * FROM expense_entries ORDER BY expense_dat
         <form method="GET" class="d-flex gap-2">
             <input type="date" class="form-control" name="start_date" value="<?php echo htmlspecialchars($startDate); ?>">
             <input type="date" class="form-control" name="end_date" value="<?php echo htmlspecialchars($endDate); ?>">
-            <button class="btn btn-outline-primary">Apply</button>
+            <button class="btn btn-primary"><i class="bi bi-funnel me-1"></i>Apply</button>
         </form>
     </div>
 

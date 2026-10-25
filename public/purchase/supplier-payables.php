@@ -93,13 +93,13 @@ $exportBills = '../api/export_csv.php?type=purchases&payment_status=Pending';
         <div class="card-header bg-white d-flex flex-wrap gap-2 justify-content-between align-items-center">
             <h6 class="mb-0 text-primary">Outstanding Bills</h6>
             <form method="GET" class="d-flex gap-2">
-                <select class="form-select form-select-sm" name="supplier_id" style="min-width:170px;">
+                <select class="form-select form-select-sm filter-select" name="supplier_id">
                     <option value="">All Suppliers</option>
                     <?php foreach ($suppliers as $s): ?>
                         <option value="<?php echo (int)$s['id']; ?>" <?php echo $supplierId === (int)$s['id'] ? 'selected' : ''; ?>><?php echo htmlspecialchars($s['name']); ?></option>
                     <?php endforeach; ?>
                 </select>
-                <button class="btn btn-sm btn-outline-primary">Filter</button>
+                <button class="btn btn-sm btn-primary"><i class="bi bi-funnel me-1"></i>Apply</button>
             </form>
         </div>
         <div class="table-responsive">

@@ -135,7 +135,7 @@ $expired_medicines = $medicine->getExpiredMedicines();
                             <option value="60" <?php echo $days_threshold == 60 ? 'selected' : ''; ?>>60 Days</option>
                             <option value="90" <?php echo $days_threshold == 90 ? 'selected' : ''; ?>>90 Days</option>
                         </select>
-                        <button type="submit" class="btn btn-outline-secondary">Update</button>
+                        <button type="submit" class="btn btn-primary"><i class="bi bi-funnel me-1"></i>Apply</button>
                     </div>
                 </form>
             </div>

@@ -78,7 +78,7 @@ $movements = $cashRegister->getMovements($businessDate);
         <h2 class="fw-bold text-primary mb-0"><i class="bi bi-cash-stack me-2"></i>End-of-Day Cash Register</h2>
         <form method="GET" class="d-flex gap-2">
             <input type="date" class="form-control" name="date" value="<?php echo htmlspecialchars($businessDate); ?>">
-            <button class="btn btn-outline-primary" type="submit">Load</button>
+            <button class="btn btn-primary" type="submit"><i class="bi bi-funnel me-1"></i>Apply</button>
         </form>
     </div>
 

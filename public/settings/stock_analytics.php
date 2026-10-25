@@ -90,12 +90,12 @@ foreach ($nearExpiry as $n) {
     <div class="d-flex flex-wrap gap-3 justify-content-between align-items-center mb-4">
         <h2 class="fw-bold text-primary mb-0"><i class="bi bi-bar-chart-line me-2"></i>Stock Valuation & Purchase Analytics</h2>
         <form method="GET" class="d-flex gap-2">
-            <select class="form-select" name="days" style="min-width:160px;">
+            <select class="form-select filter-select" name="days">
                 <option value="30" <?php echo $periodDays === 30 ? 'selected' : ''; ?>>Last 30 days</option>
                 <option value="60" <?php echo $periodDays === 60 ? 'selected' : ''; ?>>Last 60 days</option>
                 <option value="90" <?php echo $periodDays === 90 ? 'selected' : ''; ?>>Last 90 days</option>
             </select>
-            <button class="btn btn-outline-primary" type="submit">Apply</button>
+            <button class="btn btn-primary" type="submit"><i class="bi bi-funnel me-1"></i>Apply</button>
         </form>
     </div>
 

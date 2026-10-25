@@ -124,7 +124,7 @@ $medicines_list = $medicine->read();
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <button type="submit" class="btn btn-outline-primary w-100">Find Records</button>
+                            <button type="submit" class="btn btn-primary w-100"><i class="bi bi-search me-1"></i>Search</button>
                         </div>
                     </form>
 

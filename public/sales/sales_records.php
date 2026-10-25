@@ -201,7 +201,7 @@ while ($row = $medStmt->fetch(PDO::FETCH_ASSOC)) {
                     </div>
                     <?php endif; ?>
                     <div class="col-md-4 d-flex gap-2">
-                        <button type="submit" class="btn btn-primary flex-grow-1"><i class="bi bi-funnel me-2"></i>Apply Filter</button>
+                        <button type="submit" class="btn btn-primary flex-grow-1"><i class="bi bi-funnel me-1"></i>Apply</button>
                         <?php if($startDate || $endDate || $paymentMethod): ?>
                             <a href="sales_records.php" class="btn btn-outline-secondary">Clear</a>
                         <?php endif; ?>

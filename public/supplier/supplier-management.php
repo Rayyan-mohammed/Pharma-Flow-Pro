@@ -116,7 +116,7 @@ if ($action == 'list') {
                         <div class="input-group">
                             <span class="input-group-text bg-light border-end-0"><i class="bi bi-search text-muted"></i></span>
                             <input type="text" class="form-control border-start-0 ps-0" name="search" placeholder="Name, contact or email" value="<?php echo htmlspecialchars($search); ?>">
-                            <button type="submit" class="btn btn-outline-primary">Search</button>
+                            <button type="submit" class="btn btn-primary">Search</button>
                             <?php if($search): ?>
                                 <a href="?" class="btn btn-outline-secondary">Clear</a>
                             <?php endif; ?>

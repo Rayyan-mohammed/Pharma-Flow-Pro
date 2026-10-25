@@ -65,7 +65,7 @@ $medicines = $medicine->read()->fetchAll(PDO::FETCH_ASSOC);
     <?php endif; ?>
 
     <div class="row g-4">
-        <div class="col-lg-7">
+        <div class="col-12">
             <div class="card border-0 shadow-sm">
                 <div class="card-header bg-white"><h6 class="mb-0 text-primary">Create Purchase Return</h6></div>
                 <div class="card-body">
@@ -94,8 +94,8 @@ $medicines = $medicine->read()->fetchAll(PDO::FETCH_ASSOC);
                         </div>
 
                         <div class="table-responsive mb-3">
-                            <table class="table table-sm" id="returnItemsTable">
-                                <thead class="table-light"><tr><th style="min-width:200px;">Medicine</th><th style="min-width:140px;">Batch</th><th class="text-end" style="min-width:90px;">Qty</th><th class="text-end" style="min-width:110px;">Cost</th><th class="text-end" style="min-width:110px;">Line</th><th></th></tr></thead>
+                            <table class="table table-sm line-items" id="returnItemsTable">
+                                <thead class="table-light"><tr><th class="col-medicine">Medicine</th><th class="col-batch">Batch</th><th class="text-end col-qty">Qty</th><th class="text-end col-money">Cost</th><th class="text-end col-money">Line</th><th></th></tr></thead>
                                 <tbody></tbody>
                             </table>
                         </div>
@@ -116,7 +116,7 @@ $medicines = $medicine->read()->fetchAll(PDO::FETCH_ASSOC);
             </div>
         </div>
 
-        <div class="col-lg-5">
+        <div class="col-12">
             <div class="card border-0 shadow-sm">
                 <div class="card-header bg-white"><h6 class="mb-0 text-primary">Recent Supplier Returns</h6></div>
                 <div class="table-responsive">

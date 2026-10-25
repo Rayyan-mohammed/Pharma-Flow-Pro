@@ -67,17 +67,17 @@ $allUsers = $user->readAll();
                             <?php endforeach; ?>
                         </select>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <label class="form-label text-muted small">From</label>
                         <input type="date" name="date_from" class="form-control" value="<?php echo htmlspecialchars($filters['date_from'] ?? ''); ?>">
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <label class="form-label text-muted small">To</label>
                         <input type="date" name="date_to" class="form-control" value="<?php echo htmlspecialchars($filters['date_to'] ?? ''); ?>">
                     </div>
-                    <div class="col-md-2 d-flex gap-2">
-                        <button type="submit" class="btn btn-primary flex-grow-1"><i class="bi bi-funnel"></i> Filter</button>
-                        <a href="activity_log.php" class="btn btn-outline-secondary"><i class="bi bi-x-lg"></i></a>
+                    <div class="col-12 d-flex gap-2">
+                        <button type="submit" class="btn btn-primary"><i class="bi bi-funnel me-1"></i>Apply</button>
+                        <a href="activity_log.php" class="btn btn-outline-secondary">Clear</a>
                     </div>
                 </form>
             </div>
