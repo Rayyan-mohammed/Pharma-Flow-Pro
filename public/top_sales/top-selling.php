@@ -242,7 +242,7 @@ $profitMargin = $summary['total_revenue'] > 0 ? ($summary['total_profit'] / $sum
                     <table class="table table-hover align-middle mb-0">
                         <thead class="bg-light text-secondary">
                             <tr>
-                                <th class="px-4 py-3 text-center" style="width: 70px;">Rank</th>
+                                <th class="px-4 py-3 text-center col-rank">Rank</th>
                                 <th class="py-3">Medicine</th>
                                 <th class="py-3 text-center">Sales Count</th>
                                 <th class="py-3 text-center">Total Qty</th>
@@ -260,7 +260,7 @@ $profitMargin = $summary['total_revenue'] > 0 ? ($summary['total_profit'] / $sum
                                 $rankBadge = '<span class="badge bg-secondary rounded-pill">'.$r.'</span>';
                                 if($r == 1) $rankBadge = '<i class="bi bi-trophy-fill text-warning fs-5"></i>';
                                 if($r == 2) $rankBadge = '<i class="bi bi-award-fill text-secondary fs-5"></i>';
-                                if($r == 3) $rankBadge = '<i class="bi bi-award-fill fs-5" style="color:#cd7f32"></i>';
+                                if($r == 3) $rankBadge = '<i class="bi bi-award-fill fs-5 text-bronze"></i>';
                             ?>
                                 <tr>
                                     <td class="px-4 text-center"><?php echo $rankBadge; ?></td>
@@ -314,7 +314,7 @@ $profitMargin = $summary['total_revenue'] > 0 ? ($summary['total_profit'] / $sum
                                     <td class="px-4"><?php echo $ci + 1; ?></td>
                                     <td>
                                         <div class="d-flex align-items-center">
-                                            <div class="bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center me-2" style="width:32px;height:32px;">
+                                            <div class="bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center me-2 size-32">
                                                 <i class="bi bi-person text-primary"></i>
                                             </div>
                                             <strong><?php echo htmlspecialchars($cust['customer_name']); ?></strong>

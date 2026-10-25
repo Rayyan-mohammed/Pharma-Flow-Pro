@@ -173,6 +173,7 @@ $card_auth_ref = trim((string)($first_sale['card_auth_ref'] ?? ''));
             font-weight: 700;
             letter-spacing: 1px;
         }
+        .invoice-header .invoice-meta .inv-date { font-size: 0.82rem; opacity: 0.85; margin-top: 2px; }
 
         .invoice-body { padding: 32px 36px; }
 
@@ -228,6 +229,12 @@ $card_auth_ref = trim((string)($first_sale['card_auth_ref'] ?? ''));
         }
         .items-table tbody tr:hover { background: #fafbfc; }
         .items-table tbody tr:last-child td { border-bottom: none; }
+        .items-table .col-no { width: 5%; }
+        .items-table .col-item { width: 40%; }
+        .items-table .col-qty { width: 12%; }
+        .items-table .col-price { width: 18%; }
+        .items-table .col-amount { width: 20%; }
+        .items-table .amount { font-weight: 600; }
         .item-name { font-weight: 600; color: var(--text-dark); }
         .item-batch {
             display: inline-block;
@@ -342,7 +349,7 @@ $card_auth_ref = trim((string)($first_sale['card_auth_ref'] ?? ''));
         <div class="invoice-meta">
             <div class="inv-label">Invoice</div>
             <div class="inv-number"><?php echo $invoice_number; ?></div>
-            <div style="font-size:0.82rem; opacity:0.85; margin-top:2px;"><?php echo $invoice_date; ?></div>
+            <div class="inv-date"><?php echo $invoice_date; ?></div>
         </div>
     </div>
 
@@ -370,11 +377,11 @@ $card_auth_ref = trim((string)($first_sale['card_auth_ref'] ?? ''));
         <table class="items-table">
             <thead>
                 <tr>
-                    <th style="width:5%">#</th>
-                    <th style="width:40%">Medicine</th>
-                    <th class="text-center" style="width:12%">Qty</th>
-                    <th class="text-right" style="width:18%">Unit Price</th>
-                    <th class="text-right" style="width:20%">Amount</th>
+                    <th class="col-no">#</th>
+                    <th class="col-item">Medicine</th>
+                    <th class="text-center col-qty">Qty</th>
+                    <th class="text-right col-price">Unit Price</th>
+                    <th class="text-right col-amount">Amount</th>
                 </tr>
             </thead>
             <tbody>
@@ -394,7 +401,7 @@ $card_auth_ref = trim((string)($first_sale['card_auth_ref'] ?? ''));
                     </td>
                     <td class="text-center"><?php echo $sale['quantity']; ?></td>
                     <td class="text-right"><?php echo number_format($sale['unit_price'], 2); ?></td>
-                    <td class="text-right" style="font-weight:600;"><?php echo number_format($sale['total_price'], 2); ?></td>
+                    <td class="text-right amount"><?php echo number_format($sale['total_price'], 2); ?></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -429,7 +436,7 @@ $card_auth_ref = trim((string)($first_sale['card_auth_ref'] ?? ''));
             <i class="bi bi-heart-pulse"></i> Thank you for choosing <strong><?php echo htmlspecialchars(SHOP_NAME); ?></strong>.<br>
             We wish you a speedy recovery. Get well soon!
         </div>
-        <div class="footer-note" style="text-align:right;">
+        <div class="footer-note text-right">
             <strong>Payment:</strong> <?php echo htmlspecialchars($payment_method); ?><br>
             <?php if ($payment_method === 'Cash'): ?>
                 Received: <?php echo number_format($amount_tendered, 2); ?> | Change: <?php echo number_format($change_due, 2); ?><br>

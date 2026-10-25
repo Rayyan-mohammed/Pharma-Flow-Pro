@@ -341,7 +341,7 @@ $medicines = $medicine->read();
                         <span class="badge bg-primary rounded-pill" id="cartCount">0 items</span>
                     </div>
                     <div class="card-body p-0">
-                        <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
+                        <div class="table-responsive scroll-y-300">
                             <table class="table table-hover align-middle mb-0">
                                 <thead class="table-light sticky-top">
                                     <tr>
@@ -725,7 +725,7 @@ $medicines = $medicine->read();
                     row.innerHTML = `
                         <td>
                             <div class="fw-bold">${item.name}</div>
-                            ${item.rx_verified ? '<span class="badge bg-warning text-dark" style="font-size:0.7em">Rx Verified</span>' : ''}
+                            ${item.rx_verified ? '<span class="badge bg-warning text-dark badge-xs">Rx Verified</span>' : ''}
                         </td>
                         <td class="text-center">${item.qty}</td>
                         <td class="text-end">₹${item.price.toFixed(2)}</td>
@@ -907,7 +907,7 @@ $medicines = $medicine->read();
                         <div class="d-flex justify-content-between align-items-center border-bottom py-1">
                             <div>
                                 <div class="fw-semibold small">${c.hold_code}</div>
-                                <div class="text-muted" style="font-size:0.75rem">${c.customer_name || 'Walk-in'} ${c.customer_phone || ''}</div>
+                                <div class="text-muted text-xs">${c.customer_name || 'Walk-in'} ${c.customer_phone || ''}</div>
                             </div>
                             <button type="button" class="btn btn-sm btn-outline-primary" onclick="resumeHeldCart(${c.id})">Resume</button>
                         </div>

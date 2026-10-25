@@ -313,8 +313,8 @@ while ($row = $medStmt->fetch(PDO::FETCH_ASSOC)) {
                                     <td>
                                         <?php if(!empty($sale['customer_name'])): ?>
                                             <div class="d-flex align-items-center">
-                                                <div class="avatar-sm bg-light rounded-circle me-2 d-flex align-items-center justify-content-center" style="width: 24px; height: 24px;">
-                                                    <i class="bi bi-person text-secondary" style="font-size: 0.8rem;"></i>
+                                                <div class="avatar-sm bg-light rounded-circle me-2 d-flex align-items-center justify-content-center size-24">
+                                                    <i class="bi bi-person text-secondary icon-xs"></i>
                                                 </div>
                                                 <div>
                                                     <div><?php echo htmlspecialchars($sale['customer_name']); ?></div>

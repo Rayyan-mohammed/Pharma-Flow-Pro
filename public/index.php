@@ -162,7 +162,7 @@ $h = function ($s) { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); };
                 <div class="work-head">
                     <div>
                         <span class="section-label mono">What we offer</span>
-                        <h2 style="margin-top:16px">Everything your family needs, under one roof.</h2>
+                        <h2>Everything your family needs, under one roof.</h2>
                     </div>
                     <p>From prescribed medicines to everyday general items, healthcare made simple, affordable and close to home.</p>
                 </div>
@@ -192,7 +192,7 @@ $h = function ($s) { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); };
             <div class="facts">
                 <div class="fact" data-reveal><span class="n"><span data-count="15">15</span><sup>+</sup></span><span class="mono">Years serving Mahabubnagar</span></div>
                 <div class="fact" data-reveal><span class="n"><span data-count="25">25</span><sup>+</sup></span><span class="mono">Years in the medical field</span></div>
-                <div class="fact" data-reveal><span class="n" style="font-size:clamp(44px,5.4vw,84px)">B.Pharm</span><span class="mono">Karnataka, qualified chemist</span></div>
+                <div class="fact" data-reveal><span class="n n-word">B.Pharm</span><span class="mono">Karnataka, qualified chemist</span></div>
             </div>
         </section>
 
@@ -206,7 +206,7 @@ $h = function ($s) { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); };
         <section class="sheet contact" id="contact">
             <div class="contact-box">
                 <div>
-                    <span class="section-label mono" style="color:var(--on-dark-muted)">Get in touch</span>
+                    <span class="section-label mono">Get in touch</span>
                     <h2 data-reveal>Visit us, or call.</h2>
                     <a class="big-tel" data-reveal href="tel:<?php echo $phoneTel; ?>"><?php echo $h(SHOP_PHONE); ?></a>
                     <div class="c-list" data-reveal>

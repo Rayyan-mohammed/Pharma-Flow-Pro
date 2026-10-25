@@ -141,7 +141,7 @@ if ($action == 'list') {
                                         <tr>
                                             <td class="px-4">
                                                 <div class="d-flex align-items-center">
-                                                    <div class="avatar-sm bg-primary bg-opacity-10 rounded-circle me-3 d-flex align-items-center justify-content-center text-primary fw-bold" style="width: 40px; height: 40px; min-width: 40px;">
+                                                    <div class="avatar-sm bg-primary bg-opacity-10 rounded-circle me-3 d-flex align-items-center justify-content-center text-primary fw-bold size-40 flex-shrink-0">
                                                         <?php echo strtoupper(substr($row['name'], 0, 1)); ?>
                                                     </div>
                                                     <div>
@@ -166,7 +166,7 @@ if ($action == 'list') {
                                             <td class="text-muted small">
                                                 <div class="d-flex">
                                                     <i class="bi bi-geo-alt me-2 mt-1"></i>
-                                                    <span class="text-truncate" style="max-width: 200px;" title="<?php echo htmlspecialchars($row['address']); ?>">
+                                                    <span class="text-truncate truncate-200" title="<?php echo htmlspecialchars($row['address']); ?>">
                                                         <?php echo htmlspecialchars($row['address']); ?>
                                                     </span>
                                                 </div>

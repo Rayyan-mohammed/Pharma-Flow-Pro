@@ -194,7 +194,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['csv_file'])) {
                         <h5 class="mb-0 text-primary"><i class="bi bi-list-check me-2"></i>Import Results</h5>
                     </div>
                     <div class="card-body p-0">
-                        <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+                        <div class="table-responsive scroll-y-400">
                             <table class="table table-sm table-hover align-middle mb-0">
                                 <thead class="bg-light sticky-top">
                                     <tr>

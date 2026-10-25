@@ -107,7 +107,7 @@ if ($currentUser['role'] === 'Staff') $dashboardLink = '../dashboard/staff_dashb
                 <div class="card border-0 shadow-sm mb-4">
                     <div class="card-body p-4">
                         <div class="d-flex align-items-center mb-4">
-                            <div class="bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center me-3" style="width:64px;height:64px;">
+                            <div class="bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center me-3 size-64">
                                 <i class="bi bi-person-circle text-primary fs-1"></i>
                             </div>
                             <div>

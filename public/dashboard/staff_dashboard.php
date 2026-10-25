@@ -42,7 +42,7 @@ $lowStockItems = $medicine->getLowStockItems();
         <div class="card bg-primary text-white mb-4">
             <div class="card-body p-4 position-relative">
                 <h4 class="mb-1 fw-bold">Welcome back, <?php echo $userNameDisplay; ?></h4>
-                <p class="mb-0 opacity-75" style="font-size:0.875rem;">Staff &middot; <?php echo date('l, d M Y'); ?></p>
+                <p class="mb-0 opacity-75">Staff &middot; <?php echo date('l, d M Y'); ?></p>
             </div>
         </div>
 
@@ -55,7 +55,7 @@ $lowStockItems = $medicine->getLowStockItems();
                             <h6 class="mb-1">Total Medicines</h6>
                             <h2 class="mb-0"><?php echo number_format($stats['total_medicines']); ?></h2>
                         </div>
-                        <div class="fs-1" style="color:var(--primary);"><i class="bi bi-capsule"></i></div>
+                        <div class="fs-1 text-primary"><i class="bi bi-capsule"></i></div>
                     </div>
                 </div>
             </div>
@@ -66,7 +66,7 @@ $lowStockItems = $medicine->getLowStockItems();
                             <h6 class="mb-1">Low Stock Items</h6>
                             <h2 class="mb-0"><?php echo number_format($stats['low_stock']); ?></h2>
                         </div>
-                        <div class="fs-1" style="color:var(--warning);"><i class="bi bi-exclamation-triangle"></i></div>
+                        <div class="fs-1 text-warning"><i class="bi bi-exclamation-triangle"></i></div>
                     </div>
                 </div>
             </div>
@@ -77,7 +77,7 @@ $lowStockItems = $medicine->getLowStockItems();
                             <h6 class="mb-1">Expired Medicines</h6>
                             <h2 class="mb-0"><?php echo number_format($stats['expired']); ?></h2>
                         </div>
-                        <div class="fs-1" style="color:var(--danger);"><i class="bi bi-calendar-x"></i></div>
+                        <div class="fs-1 text-danger"><i class="bi bi-calendar-x"></i></div>
                     </div>
                 </div>
             </div>
@@ -95,42 +95,42 @@ $lowStockItems = $medicine->getLowStockItems();
                 <!-- Low Stock Alerts -->
                 <div class="card mb-4">
                     <div class="card-header d-flex align-items-center gap-2">
-                        <i class="bi bi-exclamation-triangle-fill" style="color:var(--danger);"></i>
+                        <i class="bi bi-exclamation-triangle-fill text-danger"></i>
                         <h5 class="mb-0">Low Stock Alerts</h5>
                     </div>
                     <ul class="list-group list-group-flush">
                         <?php if (empty($lowStockItems)): ?>
-                            <li class="list-group-item text-center py-4" style="color:var(--text-tertiary);">
-                                <i class="bi bi-check-circle me-1" style="color:var(--success);"></i>All stock levels healthy
+                            <li class="list-group-item text-center py-4 text-faint">
+                                <i class="bi bi-check-circle me-1 text-success"></i>All stock levels healthy
                             </li>
                         <?php else: ?>
                             <?php foreach($lowStockItems as $item): ?>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <span style="font-size:0.875rem;"><?php echo htmlspecialchars($item['name']); ?></span>
+                                    <span class="text-sm"><?php echo htmlspecialchars($item['name']); ?></span>
                                     <span class="badge bg-danger rounded-pill"><?php echo $item['stock']; ?></span>
                                 </li>
                             <?php endforeach; ?>
                         <?php endif; ?>
                     </ul>
                     <div class="card-footer text-center">
-                        <small style="color:var(--text-tertiary);">Contact a pharmacist to restock</small>
+                        <small class="text-faint">Contact a pharmacist to restock</small>
                     </div>
                 </div>
 
                 <!-- System Info -->
                 <div class="card">
                     <div class="card-header d-flex align-items-center gap-2">
-                        <i class="bi bi-info-circle" style="color:var(--primary);"></i>
+                        <i class="bi bi-info-circle text-primary"></i>
                         <h5 class="mb-0">System Info</h5>
                     </div>
-                    <div class="card-body" style="font-size:0.875rem;">
+                    <div class="card-body text-sm">
                         <div class="d-flex justify-content-between mb-2">
-                            <span style="color:var(--text-secondary);">Date</span>
+                            <span class="text-secondary">Date</span>
                             <span class="fw-600"><?php echo date('d M Y'); ?></span>
                         </div>
                         <div class="d-flex justify-content-between">
-                            <span style="color:var(--text-secondary);">Server</span>
-                            <span class="fw-600" style="color:var(--success);"><i class="bi bi-circle-fill me-1" style="font-size:0.5rem;"></i>Online</span>
+                            <span class="text-secondary">Server</span>
+                            <span class="fw-600 text-success"><i class="bi bi-circle-fill me-1 status-dot"></i>Online</span>
                         </div>
                     </div>
                 </div>

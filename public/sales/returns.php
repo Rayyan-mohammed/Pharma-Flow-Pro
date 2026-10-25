@@ -234,12 +234,12 @@ $returnableSales = $returns->getRecentSalesForReturn(250);
                                                 <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
                                                 <input type="hidden" name="action" value="approve">
                                                 <input type="hidden" name="return_id" value="<?php echo $r['id']; ?>">
-                                                <select name="refund_method" class="form-select form-select-sm" style="width:90px;">
+                                                <select name="refund_method" class="form-select form-select-sm inline-select">
                                                     <option value="Cash" <?php echo ($r['original_payment_method'] ?? '') === 'Cash' ? 'selected' : ''; ?>>Cash</option>
                                                     <option value="Card" <?php echo ($r['original_payment_method'] ?? '') === 'Card' ? 'selected' : ''; ?>>Card</option>
                                                     <option value="UPI" <?php echo ($r['original_payment_method'] ?? '') === 'UPI' ? 'selected' : ''; ?>>UPI</option>
                                                 </select>
-                                                <input type="text" name="refund_reference" class="form-control form-control-sm" style="width:110px;" placeholder="Ref (opt)">
+                                                <input type="text" name="refund_reference" class="form-control form-control-sm inline-input" placeholder="Ref (opt)">
                                                 <button class="btn btn-sm btn-success"><i class="bi bi-check-lg"></i></button>
                                             </form>
                                             <form method="POST" class="d-inline" onsubmit="return confirm('Reject this return?')">

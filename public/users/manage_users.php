@@ -171,7 +171,7 @@ foreach ($roleCounts as $rc) {
                             <tr class="<?php echo !$u['is_active'] ? 'table-secondary' : ''; ?>">
                                 <td class="px-4">
                                     <div class="d-flex align-items-center">
-                                        <div class="bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center me-3" style="width:40px;height:40px;">
+                                        <div class="bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center me-3 size-40">
                                             <i class="bi bi-person text-primary"></i>
                                         </div>
                                         <div>
