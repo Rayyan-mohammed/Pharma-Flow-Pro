@@ -72,10 +72,14 @@ pharmaflow_pro/
 |       |-- migrate.php
 |       |-- seed_admin.php
 |       |-- verify_admin.php
+|       |-- check_db.php
+|       |-- add_initial_stock.php
 |       |-- add_new_features.php
 |       |-- scheduled_backup.php
 |       |-- update_medicines_table.php
 |       `-- update_suppliers_table.php
+|-- docs/
+|   `-- project-abstract-and-er-model.md
 |-- public/
 |   |-- index.php
 |   |-- styles.css
@@ -85,9 +89,7 @@ pharmaflow_pro/
 |   |-- purchase/
 |   |-- settings/
 |   `-- users/
-|-- add_initial_stock.php
-|-- check_db.php
-`-- index.php
+`-- index.php            (redirects the site root to public/)
 ```
 
 ## Prerequisites
