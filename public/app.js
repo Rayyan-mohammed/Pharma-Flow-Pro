@@ -33,6 +33,14 @@
     scrim.addEventListener('click', function () { openDrawer(false); });
     mq.addEventListener ? mq.addEventListener('change', function () { openDrawer(false); applyCollapsed(store(true, KEY_COLLAPSED) === '1'); }) : null;
 
+    /* ---------- back: previous page in the app, otherwise the dashboard (the link's href) ---------- */
+    var back = document.getElementById('back-btn');
+    if (back) back.addEventListener('click', function (e) {
+        var ref = document.referrer;
+        var fromApp = ref.indexOf(location.origin + '/') === 0 && ref !== location.href && !/\/login\.php/.test(ref);
+        if (fromApp && history.length > 1) { e.preventDefault(); history.back(); }
+    });
+
     // keep the active item in view in a long menu
     var active = side.querySelector('.nav-op.is-active');
     if (active && active.scrollIntoView) { try { active.scrollIntoView({ block: 'center' }); } catch (e) {} }

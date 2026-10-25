@@ -158,6 +158,7 @@ function render_app_shell() {
 
     <header class="topbar" id="topbar">
         <button class="icon-btn menu-btn" id="menu-btn" type="button" aria-label="Open menu"><i class="bi bi-list"></i></button>
+        <?php if (!$onDash): ?><a class="back-btn" id="back-btn" href="<?php echo app_esc($dash); ?>" aria-label="Go back" title="Go back"><i class="bi bi-arrow-left"></i><span>Back</span></a><?php endif; ?>
         <div class="crumb">
             <?php if ($crumbGroup !== ''): ?><span class="mono"><?php echo app_esc($crumbGroup); ?></span><i class="bi bi-chevron-right"></i><?php endif; ?>
             <b><?php echo app_esc($crumbPage !== '' ? $crumbPage : SHOP_SHORT_NAME); ?></b>

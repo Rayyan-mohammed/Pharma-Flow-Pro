@@ -448,6 +448,10 @@ $card_auth_ref = trim((string)($first_sale['card_auth_ref'] ?? ''));
 
     <!-- Actions -->
     <div class="actions no-print">
+        <button onclick="history.back()" class="btn-invoice btn-close-inv" id="invoice-back" style="display:none;">
+            <i class="bi bi-arrow-left"></i> Back
+        </button>
+        <script>if (history.length > 1) document.getElementById('invoice-back').style.display = '';</script>
         <button onclick="window.print()" class="btn-invoice btn-print">
             <i class="bi bi-printer"></i> Print Invoice
         </button>
