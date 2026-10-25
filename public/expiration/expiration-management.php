@@ -25,19 +25,11 @@ $expired_medicines = $medicine->getExpiredMedicines();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <!-- Custom CSS -->
-    <link href="../styles.css" rel="stylesheet">
     <link href="../app.css" rel="stylesheet">
 </head>
 <body class="has-shell">
 <?php render_app_shell(); ?>
     <!-- Navbar -->
-    <nav class="navbar navbar-dark bg-primary">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="../dashboard/dashboard.php">
-                <i class="bi bi-heart-pulse-fill me-2"></i><?php echo htmlspecialchars(SHOP_SHORT_NAME); ?>
-            </a>
-        </div>
-    </nav>
 
     <!-- Main Content -->
     <div class="container py-4">

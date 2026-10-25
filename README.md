@@ -82,7 +82,7 @@ pharmaflow_pro/
 |   `-- project-abstract-and-er-model.md
 |-- public/
 |   |-- index.php
-|   |-- styles.css
+|   |-- app.css
 |   |-- dashboard/
 |   |-- inventory/
 |   |-- sales/
