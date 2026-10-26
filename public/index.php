@@ -3,8 +3,9 @@ require_once '../app/init.php';
 
 $phoneTel   = '+919885144064';
 $phoneWa    = '919885144064';
-$mapsLink   = 'https://maps.app.goo.gl/n9qAJdirNfbZVXms5';
-$mapsEmbed  = 'https://www.google.com/maps?q=16.755555,78.0355812&z=17&output=embed';
+$mapsLink   = 'https://maps.app.goo.gl/QHPi7jyQySBwWMvB8';
+// Place embed (Share > Embed a map) so the store's name and category card shows
+$mapsEmbed  = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1913.0!2d78.0355812!3d16.755555!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bca2f5943885715%3A0x5f6e2ed54ccec975!2sOM%20SAI%20BABA%20MEDICAL%20%26%20GENERAL%20STORES!5e0!3m2!1sen!2sin!4v1761500000000!5m2!1sen!2sin';
 $isLoggedIn = isset($_SESSION['currentUser']);
 $dashLink   = 'dashboard/dashboard.php';
 if ($isLoggedIn) {
