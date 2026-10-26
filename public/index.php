@@ -3,8 +3,8 @@ require_once '../app/init.php';
 
 $phoneTel   = '+919885144064';
 $phoneWa    = '919885144064';
-$mapsLink   = 'https://www.google.com/maps/search/?api=1&query=' . rawurlencode('Yenugonda Mahabubnagar');
-$mapsEmbed  = 'https://www.google.com/maps?q=' . rawurlencode('Yenugonda, Mahabubnagar') . '&output=embed';
+$mapsLink   = 'https://maps.app.goo.gl/n9qAJdirNfbZVXms5';
+$mapsEmbed  = 'https://www.google.com/maps?q=16.755555,78.0355812&z=17&output=embed';
 $isLoggedIn = isset($_SESSION['currentUser']);
 $dashLink   = 'dashboard/dashboard.php';
 if ($isLoggedIn) {
